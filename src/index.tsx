@@ -48,8 +48,8 @@ const COMPANIES: Company[] = [
     category: 'AUCTION',
     label: 'オークション事業',
     name: '株式会社Abby auction',
-    url: '',
-    external: false,
+    url: 'https://abby-auction.com/',
+    external: true,
     body: [
       'ブランドジュエリー専門オークション「Abb auction byOKURA」を運営。',
       '売り手と買い手、商品と市場をつなぎ、新たな流通を生み出します。',
@@ -351,7 +351,7 @@ const Philosophy = () => (
 const GroupCompanies = () => {
   const list = [
     { name: '株式会社abby', cat: 'REUSE', url: 'https://abby-inc.com/' },
-    { name: '株式会社Abby auction', cat: 'AUCTION', url: '' },
+    { name: '株式会社Abby auction', cat: 'AUCTION', url: 'https://abby-auction.com/' },
     { name: '株式会社Abby Solution', cat: 'HUMAN RESOURCES', url: 'https://abby-hr.com/' },
   ]
   return (
@@ -538,7 +538,9 @@ const Footer = () => (
                 </a>
               </li>
               <li>
-                <span class="is-muted">株式会社Abby auction</span>
+                <a href="https://abby-auction.com/" target="_blank" rel="noopener noreferrer">
+                  株式会社Abby auction
+                </a>
               </li>
               <li>
                 <a href="https://abby-hr.com/" target="_blank" rel="noopener noreferrer">
@@ -804,3 +806,4 @@ app.notFound((c) => {
 })
 
 export default app
+
