@@ -27,7 +27,7 @@ abby GROUP（株式会社abby／株式会社Abby auction／株式会社Abby Solu
 
 - 固定ヘッダー（スクロールで白背景に切替、モバイルはハンバーガーメニュー）
 - **ファーストビュー（BrandHero）** — **ブランドイエロー（`#F0B502`）背景 × マスコット（猫のイラスト）** ＋タイポグラフィ。左に「abby / G R O U P（ブランドロゴ）→ 価値をつなぎ、可能性をひらく。（ブランドメッセージ）→ REUSE / AUCTION / HUMAN RESOURCES（事業ドメイン）→ グループ紹介文（`abby GROUPは、リユース・オークション・人材という事業を通じて…`）→ OUR BUSINESS リンク（`#business` へ）」、右にマスコットを下揃えで配置（画面高の約80%）。ロゴはヘッダーと同一タイポグラフィ、テキストは黒。タグラインのみ明朝体（**Noto Serif JP**）。`abby → GROUP → コピー → ドメイン → 紹介文 → OUR BUSINESS` の順でゆっくりフェードイン（`prefers-reduced-motion` 対応）。※写真は不使用（イラストのみ）
-- HERO（**写真なし／黒背景＋タイポグラフィのみ**。**ファーストビューの直下に配置**。`ABBY GROUP` ラベル＋「モノに、新たな価値を。／人に、新たな可能性を。／企業に、新たな成長を。」＋縦書き SCROLL のみ。タグライン・説明文・OUR BUSINESS はファーストビューへ集約したため、このセクションからは削除済み）
+- HERO（**写真なし／黒背景＋タイポグラフィのみ**。**ファーストビューの直下に配置**。`ABBY GROUP` ラベル＋「モノに、新たな価値を。／人に、新たな可能性を。／企業に、新たな成長を。」＋縦書き SCROLL のみ。**コピーはセクション内で中央揃え**（`justify-content: center` / `text-align: center`、上下は対称の余白）。タグライン・説明文・OUR BUSINESS はファーストビューへ集約したため、このセクションからは削除済み）
 - ABOUT（**写真なし／タイポグラフィ＋余白のみ**。本文を約20%削減）
 - OUR BUSINESS（3事業を1画面ずつ紹介／01 REUSE・02 AUCTION・03 HUMAN RESOURCES。**写真なし／タイポグラフィのみ**。番号＋事業カテゴリーを大きく見せ、本文で説明）
 - OUR VALUE CREATION（**モノ・市場・人** の3つの価値を生み出すグループとして表示／VALUE OF THINGS・VALUE OF MARKET・VALUE OF PEOPLE）
