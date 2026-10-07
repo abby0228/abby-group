@@ -122,7 +122,14 @@ pm2 logs webapp --nostream
 - **プラットフォーム**: Cloudflare Pages（ご自身の Cloudflare アカウント）
 - **プロジェクト名**: `abby-group`
 - **ステータス**: ✅ デプロイ済み（公開中）
-- **本番URL**: https://abby-group.pages.dev
+- **本番URL**: https://abbygroup-inc.com （独自ドメイン・Active）
+  - `https://www.abbygroup-inc.com` も同一サイトを配信
+  - Cloudflare Pages 既定URL: https://abby-group.pages.dev
+- **DNS**（ゾーン `abbygroup-inc.com`）:
+  | Type | Name | Target | Proxy |
+  |---|---|---|---|
+  | CNAME | `@` | `abby-group.pages.dev` | Proxied |
+  | CNAME | `www` | `abby-group.pages.dev` | Proxied |
 - **GitHub**: https://github.com/abby0228/abby-group
 - **再デプロイ**:
   ```bash
