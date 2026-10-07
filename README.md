@@ -1,6 +1,6 @@
 # abby GROUP — グループポータルサイト
 
-abby GROUP（株式会社abby／株式会社Abby auction／株式会社Abb Solution）の
+abby GROUP（株式会社abby／株式会社Abby auction／株式会社Abby Solution）の
 **グループポータルサイト**です。各社を詳しく説明するLPではなく、
 グループ全体のブランド・信用・事業領域を伝え、各グループ会社の公式サイトへ案内することを目的としています。
 

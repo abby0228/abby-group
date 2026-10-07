@@ -62,7 +62,7 @@ const COMPANIES: Company[] = [
     no: '03',
     category: 'HUMAN RESOURCES',
     label: '人材ソリューション事業',
-    name: '株式会社Abb Solution',
+    name: '株式会社Abby Solution',
     url: 'https://abby-hr.com/',
     external: true,
     body: [
@@ -352,7 +352,7 @@ const GroupCompanies = () => {
   const list = [
     { name: '株式会社abby', cat: 'REUSE', url: 'https://abby-inc.com/' },
     { name: '株式会社Abby auction', cat: 'AUCTION', url: '' },
-    { name: '株式会社Abb Solution', cat: 'HUMAN RESOURCES', url: 'https://abby-hr.com/' },
+    { name: '株式会社Abby Solution', cat: 'HUMAN RESOURCES', url: 'https://abby-hr.com/' },
   ]
   return (
     <section class="section companies" id="companies">
@@ -542,7 +542,7 @@ const Footer = () => (
               </li>
               <li>
                 <a href="https://abby-hr.com/" target="_blank" rel="noopener noreferrer">
-                  株式会社Abb Solution
+                  株式会社Abby Solution
                 </a>
               </li>
             </ul>
@@ -551,7 +551,7 @@ const Footer = () => (
       </div>
 
       <p class="footer-legal">
-        abby GROUPは、株式会社abby、株式会社Abby auction、株式会社Abb Solutionによるグループブランドです。
+        abby GROUPは、株式会社abby、株式会社Abby auction、株式会社Abby Solutionによるグループブランドです。
         各社はそれぞれ独立した法人です。
       </p>
 
