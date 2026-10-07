@@ -237,8 +237,6 @@ const BrandHero = () => (
 const Hero = () => (
   <section class="hero" id="hero">
     <div class="hero-content">
-      <p class="eyebrow light">abby GROUP</p>
-
       <div class="hero-foot">
         <p class="hero-sub">
           モノに、新たな価値を。
