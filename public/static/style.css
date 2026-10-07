@@ -254,16 +254,18 @@ button {
 .header-inner {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 22px var(--pad);
+  padding: 16px var(--pad);
   display: flex;
   align-items: center;
   gap: 40px;
 }
 
+/* Logo lockup: "abby" on top, "GROUP" centred underneath */
 .brand {
   display: inline-flex;
-  align-items: baseline;
-  gap: 9px;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
   line-height: 1;
   flex-shrink: 0;
 }
@@ -278,14 +280,21 @@ button {
   text-transform: lowercase;
 }
 
-/* "GROUP" — small, light, wide tracking */
+/* "GROUP" — small, light, uppercase, spread to ~58% of the mark width */
 .brand-sub {
+  display: inline-flex;
+  justify-content: space-between;
+  width: 58%;
   font-family: var(--sans);
   font-weight: 400;
   font-size: 9px;
-  letter-spacing: 0.42em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   opacity: 0.72;
+}
+
+.brand-sub span:last-child {
+  letter-spacing: 0;
 }
 
 .global-nav {
@@ -1131,8 +1140,9 @@ button {
 
 .footer-logo {
   display: inline-flex;
-  align-items: baseline;
-  gap: 9px;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
   margin-bottom: 26px;
 }
 
@@ -1142,9 +1152,7 @@ button {
 }
 
 .footer-logo .brand-sub {
-  font-size: 9px;
-  letter-spacing: 0.42em;
-  text-transform: uppercase;
+  font-size: 10px;
   opacity: 0.7;
 }
 

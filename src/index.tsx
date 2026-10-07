@@ -108,7 +108,13 @@ const Header = () => (
     <div class="header-inner">
       <a class="brand" href="/" aria-label="abby GROUP ホーム">
         <span class="brand-mark">abby</span>
-        <span class="brand-sub">GROUP</span>
+        <span class="brand-sub">
+          <span>G</span>
+          <span>R</span>
+          <span>O</span>
+          <span>U</span>
+          <span>P</span>
+        </span>
       </a>
 
       <nav class="global-nav" aria-label="グローバルナビゲーション">
@@ -493,7 +499,13 @@ const Footer = () => (
         <div class="footer-brand">
           <p class="footer-logo">
             <span class="brand-mark">abby</span>
-            <span class="brand-sub">GROUP</span>
+            <span class="brand-sub">
+              <span>G</span>
+              <span>R</span>
+              <span>O</span>
+              <span>U</span>
+              <span>P</span>
+            </span>
           </p>
           <p class="footer-copy">
             価値をつなぎ、
@@ -806,4 +818,3 @@ app.notFound((c) => {
 })
 
 export default app
-
