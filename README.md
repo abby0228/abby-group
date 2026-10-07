@@ -28,7 +28,7 @@ abby GROUP（株式会社abby／株式会社Abby auction／株式会社Abby Solu
 - 固定ヘッダー（スクロールで白背景に切替、モバイルはハンバーガーメニュー）
 - HERO（**写真なし／黒背景＋タイポグラフィのみ**。メインコピーを主役にしたレイアウト）
 - ABOUT（**写真なし／タイポグラフィ＋余白のみ**。本文を約20%削減）
-- OUR BUSINESS（3事業を1画面ずつ**大きな写真1枚**で紹介／01 REUSE・02 AUCTION・03 HUMAN RESOURCES。写真側を広く確保）
+- OUR BUSINESS（3事業を1画面ずつ紹介／01 REUSE・02 AUCTION・03 HUMAN RESOURCES。**写真なし／タイポグラフィのみ**。番号＋事業カテゴリーを大きく見せ、本文で説明）
 - OUR VALUE CREATION（**モノ・市場・人** の3つの価値を生み出すグループとして表示／VALUE OF THINGS・VALUE OF MARKET・VALUE OF PEOPLE）
 - PHILOSOPHY（**写真なし／BLACK背景**の印象的なセクション。大きなタイポグラフィ＋余白。MISSION / VISIONも同世界観の黒背景）
 - GROUP COMPANIES（会社名・事業カテゴリー・VIEW WEBSITE のみのシンプル一覧）
@@ -45,7 +45,6 @@ abby GROUP（株式会社abby／株式会社Abby auction／株式会社Abby Solu
 - **SEO / OGP** — canonical、og:image（1200×630 `ogp.png`）、twitter:card、robots、テーマカラー
 - **構造化データ（JSON-LD）** — Organization（`sameAs` に3社公式サイト）＋ WebSite
 - **robots.txt / sitemap.xml** — 動的ルートで配信（`/`・`/group`・`/contact`・`/privacy`）
-- **画像最適化** — 事業写真3枚を最適化し、`<picture>` で **WebP** を優先配信（フォールバックはJPEG）
 - **アクセス解析の受け口** — Cloudflare Web Analytics のビーコン（トークン設定時のみ有効。`renderer.tsx` の `CF_ANALYTICS_TOKEN`）
 
 ## ルーティング / API
@@ -69,7 +68,7 @@ abby GROUP（株式会社abby／株式会社Abby auction／株式会社Abby Solu
 
 ## データ構造
 
-- `src/index.tsx` 内の `COMPANIES` 配列 … 3事業のデータ（番号・カテゴリー・会社名・本文・画像・リンク）
+- `src/index.tsx` 内の `COMPANIES` 配列 … 3事業のデータ（番号・カテゴリー・会社名・本文・リード・リンク）
 - `NEWS` 配列 … ニュース項目（date / category / title / url）。**空配列のとき NEWSセクションとナビの NEWS は自動的に非表示**
 - `FAQ` 配列 … よくあるご質問（q / a）
 - D1 テーブル `contacts` … お問い合わせ保存先（`DB` バインディング設定時のみ）
@@ -81,7 +80,7 @@ abby GROUP（株式会社abby／株式会社Abby auction／株式会社Abby Solu
 - ビルド: Vite（`@hono/vite-build`）
 - スタイル: 自前CSS（`public/static/style.css`）— Tailwind等は不使用
 - フォント: Google Fonts（**Noto Sans JP**＝日本語本文・見出し／**Cormorant Garamond**＝英字ディスプレイ／Inter＝英字UI）
-- 画像: `public/static/img/`（**各事業の実態を伝えるオリジナル生成画像3枚のみ**。AI生成。JPEG＋WebPの2形式を `<picture>` で配信）
+- 画像: **サイト内に写真は一切なし**（タイポグラフィのみで構成）。唯一の画像は OGP用の `ogp.png`
 - OGP画像: `public/static/ogp.png`（1200×630）
 - 永続化: Cloudflare D1（お問い合わせのみ）
 
@@ -96,8 +95,7 @@ webapp/
 │   ├── style.css        # デザイン一式
 │   ├── app.js           # ヘッダー・ナビ・reveal・フォーム送信
 │   ├── favicon.svg
-│   ├── ogp.png          # OGP画像（1200×630）
-│   └── img/             # 事業写真3枚（biz-reuse / biz-auction / biz-hr、各 .jpg + .webp）
+│   └── ogp.png          # OGP画像（1200×630。サイト内の唯一の画像）
 ├── ecosystem.config.cjs # PM2設定
 ├── wrangler.jsonc       # Cloudflare Pages設定
 └── vite.config.ts
@@ -115,13 +113,10 @@ pm2 logs webapp --nostream
 
 ## 写真・ビジュアルの方針
 
-- **写真は3枚のみ**（各事業1枚）。1枚を大きく見せ、白／黒／グレーを基調にモノトーン加工。
-- **HERO / ABOUT / PHILOSOPHY / OUR FUTURE は写真を置かず**、タイポグラフィ・余白・コントラストで構成（黒または白ベースでコピーを主役に）。
-- 都市・建築・会議・抽象コーポレート・汎用オフィス写真は使用しない。各事業の実態を伝えるビジュアルのみ：
-  - **REUSE**: 大理石・自然光のもとで上質な時計＋ジュエリーを撮影した商品ビジュアル
-  - **AUCTION**: 手袋＋ルーペでブランドジュエリーを検品・鑑定する様子（「入札」ではなく確認・査定のニュアンス）
-  - **HUMAN RESOURCES**: 現代的で洗練されたオフィスでの商談・提案・相談のシーン（汎用の会議写真は避ける）
-- トーン: 無料素材感を排し、Editorial / Premium / Corporate。ゴールドは英字ラベルやドットなど**控えめなアクセント**としてのみ使用。
+- **サイト内に写真は一切使用していません**。全セクションをタイポグラフィ・余白・コントラストで構成（黒または白ベースでコピーを主役に）。
+- 写真を持たないことで、Editorial / Premium / Corporate のトーンを保ちつつ、読み込みも軽量です。
+- ゴールドは英字ラベルやドットなど**控えめなアクセント**としてのみ使用。
+- 唯一の画像は OGP用の `ogp.png`（SNS共有時のサムネイル）のみ。
 
 ## タイポグラフィ / 可読性の方針
 
@@ -130,7 +125,7 @@ pm2 logs webapp --nostream
 - 英字セクション見出しは **Cormorant Garamond**（上品な Serif）
 - 本文の最大横幅は **約620px**（画面いっぱいに横長表示しない）
 - セクション上下の余白は大きめに確保
-- 写真を主役にするセクションでは、写真側を広く（`biz-inner` は 1.55 : 0.45）確保
+- OUR BUSINESS は番号（01/02/03）と事業カテゴリーを大きく見せ、本文は `--read`（約620px）で読みやすく
 
 ## 未実装 / 今後の推奨
 

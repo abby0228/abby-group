@@ -22,8 +22,6 @@ type Company = {
   url: string
   external: boolean
   body: string[]
-  image: string
-  imageAlt: string
   lead: string
 }
 
@@ -39,8 +37,6 @@ const COMPANIES: Company[] = [
       'ブランド品・ジュエリー・時計を中心に、買取・販売・卸を展開するリユース事業。',
       'モノが持つ価値を見極め、次に必要とする人へつなぎます。',
     ],
-    image: '/static/img/biz-reuse.jpg',
-    imageAlt: '大理石の上に置かれた高級時計とダイヤモンドリング',
     lead: 'モノの価値を見極め、\n次に必要とする人へ。',
   },
   {
@@ -54,8 +50,6 @@ const COMPANIES: Company[] = [
       'ブランドジュエリー専門オークション「Abb auction byOKURA」を運営。',
       '売り手と買い手、商品と市場をつなぎ、新たな流通を生み出します。',
     ],
-    image: '/static/img/biz-auction.jpg',
-    imageAlt: '手袋をした手でルーペを使い、ジュエリーを検品・鑑定する様子',
     lead: '価値を市場につなぎ、\n新たな流通を生み出す。',
   },
   {
@@ -69,8 +63,6 @@ const COMPANIES: Company[] = [
       '営業支援で培ったノウハウを活かし、営業支援・人材派遣・人材紹介などの人材ソリューションを提供します。',
       '人の可能性と企業の成長をつなぎます。',
     ],
-    image: '/static/img/biz-hr.jpg',
-    imageAlt: '現代的なオフィスで商談・提案を行うビジネスパーソン',
     lead: '人の可能性と、\n企業の成長をつなぐ。',
   },
 ]
@@ -245,18 +237,12 @@ const Business = () => (
     {COMPANIES.map((co) => (
       <article class={`biz-block ${co.category === 'AUCTION' ? 'is-dark' : ''}`} data-cat={co.category}>
         <div class="biz-inner">
-          <figure class="biz-media">
-            <picture>
-              <source srcset={co.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
-              <img src={co.image} alt={co.imageAlt} loading="lazy" width="1200" height="800" />
-            </picture>
-          </figure>
+          <div class="biz-head">
+            <span class="biz-no">{co.no}</span>
+            <span class="biz-cat">{co.category}</span>
+          </div>
 
           <div class="biz-body">
-            <div class="biz-head">
-              <span class="biz-no">{co.no}</span>
-              <span class="biz-cat">{co.category}</span>
-            </div>
             <p class="biz-label">{co.label}</p>
             <h3 class="biz-name">{co.name}</h3>
             <p class="biz-lead">{co.lead}</p>
