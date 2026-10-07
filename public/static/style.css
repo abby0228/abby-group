@@ -539,7 +539,7 @@ button {
   justify-content: flex-start;
   text-align: left;
   background: var(--brand-yellow);
-  padding: clamp(120px, 19vh, 210px) var(--pad) clamp(80px, 14vh, 170px);
+  padding: clamp(110px, 16vh, 180px) var(--pad) clamp(70px, 12vh, 140px);
   overflow: hidden;
 }
 
@@ -558,9 +558,9 @@ button {
        狭い画面では幅基準で自動縮小し、コピーと重ならないようにする --- */
 .brand-hero-cat {
   position: absolute;
-  right: clamp(0px, 3vw, 56px);
+  right: clamp(0px, 1.6vw, 30px);
   bottom: 0;
-  height: min(80svh, 60vw);
+  height: min(88svh, 64vw);
   width: auto;
   max-width: none;
   z-index: 1;
@@ -581,7 +581,7 @@ button {
 .brand-hero-mark {
   font-family: var(--logo);
   font-weight: 800;
-  font-size: clamp(40px, 9.2vw, 206px);
+  font-size: clamp(46px, 10.7vw, 222px);
   letter-spacing: -0.03em;
   line-height: 0.88;
   text-transform: lowercase;
@@ -594,7 +594,7 @@ button {
   width: 58%;
   font-family: var(--sans);
   font-weight: 400;
-  font-size: clamp(10px, 1.55vw, 24px);
+  font-size: clamp(11px, 1.75vw, 34px);
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--ink);
@@ -606,24 +606,24 @@ button {
 
 /* --- ブランドメッセージ（ロゴと明確に役割分担：細め・余白大） --- */
 .brand-hero-tagline {
-  margin-top: clamp(40px, 8vh, 108px);
+  margin-top: clamp(26px, 4.6vh, 56px);
   font-family: var(--sans);
-  font-weight: 400;
-  font-size: clamp(19px, 2.3vw, 29px);
-  line-height: 1.95;
-  letter-spacing: 0.045em;
+  font-weight: 500;
+  font-size: clamp(22px, 5.1vw, 76px);
+  line-height: 1.36;
+  letter-spacing: 0.02em;
   color: var(--ink);
 }
 
 /* --- 事業ドメイン（小さな英字ラベル。控えめな区切りとして） --- */
 .brand-hero-domains {
-  margin-top: clamp(44px, 8vh, 104px);
+  margin-top: clamp(30px, 5.2vh, 64px);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: clamp(10px, 1.4vw, 20px);
   font-family: var(--sans);
-  font-size: clamp(10px, 1vw, 12px);
+  font-size: clamp(10px, 1.2vw, 21px);
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -708,16 +708,16 @@ button {
   }
 
   .brand-hero-cat {
-    right: clamp(0px, 2vw, 28px);
-    height: min(72svh, 58vw);
+    right: clamp(0px, 1.2vw, 20px);
+    height: min(78svh, 60vw);
   }
 
   .brand-hero-tagline {
-    margin-top: clamp(32px, 6.5vh, 72px);
+    margin-top: clamp(22px, 4vh, 44px);
   }
 
   .brand-hero-domains {
-    margin-top: clamp(32px, 6vh, 64px);
+    margin-top: clamp(22px, 4vh, 44px);
   }
 }
 
