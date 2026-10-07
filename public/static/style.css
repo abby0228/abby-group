@@ -265,7 +265,7 @@ button {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;
+  gap: 2px;
   line-height: 1;
   flex-shrink: 0;
 }
@@ -285,7 +285,6 @@ button {
   display: inline-flex;
   justify-content: space-between;
   width: 58%;
-  margin-top: -2px; /* pull GROUP closer so "abby GROUP" reads as one logo */
   font-family: var(--sans);
   font-weight: 400;
   font-size: 9px;
@@ -1308,7 +1307,7 @@ button {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;
+  gap: 3px;
   margin-bottom: 26px;
 }
 
@@ -1722,6 +1721,12 @@ button {
  * ------------------------------------------------------------------ */
 @media print {
   .site-header,
+  .scroll-hint,
+  .pt-overlay {
+    display: none !important;
+  }
+}
+ite-header,
   .scroll-hint,
   .pt-overlay {
     display: none !important;
