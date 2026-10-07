@@ -180,15 +180,48 @@ const Header = () => (
   </header>
 )
 
+/* ファーストビュー — ロゴが主役。タイポグラフィのみ（写真なし） */
+const BrandHero = () => (
+  <section class="brand-hero" id="brand-hero">
+    <div class="brand-hero-inner">
+      <h1 class="brand-hero-logo" aria-label="abby GROUP">
+        <span class="brand-hero-mark">abby</span>
+        <span class="brand-hero-sub" aria-hidden="true">
+          <span>G</span>
+          <span>R</span>
+          <span>O</span>
+          <span>U</span>
+          <span>P</span>
+        </span>
+      </h1>
+
+      <div class="brand-hero-copy">
+        <p class="brand-hero-tagline">
+          価値をつなぎ、
+          <br />
+          可能性をひらく。
+        </p>
+        <p class="brand-hero-sub-copy">
+          モノに、新たな価値を。
+          <br />
+          人に、新たな可能性を。
+          <br />
+          企業に、新たな成長を。
+        </p>
+      </div>
+    </div>
+  </section>
+)
+
 const Hero = () => (
   <section class="hero" id="hero">
     <div class="hero-content">
       <p class="eyebrow light">abby GROUP</p>
-      <h1 class="hero-title">
+      <h2 class="hero-title">
         価値をつなぎ、
         <br />
         可能性をひらく。
-      </h1>
+      </h2>
 
       <div class="hero-foot">
         <p class="hero-sub">
@@ -677,6 +710,7 @@ const HomePage = () => (
   <>
     <Header />
     <main>
+      <BrandHero />
       <Hero />
       <About />
       <Business />

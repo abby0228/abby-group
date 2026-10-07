@@ -224,8 +224,13 @@ button {
 .site-header .global-nav a,
 .site-header .btn-contact,
 .site-header .nav-toggle span {
-  color: var(--white);
+  color: var(--ink);
   transition: color 0.45s var(--ease);
+}
+
+/* ロゴはライト背景ではネイビー */
+.site-header .brand-mark {
+  color: var(--navy);
 }
 
 .site-header.is-solid {
@@ -249,6 +254,22 @@ button {
 .site-header.is-solid .btn-contact {
   color: var(--ink);
   border-color: var(--ink);
+}
+
+/* ダーク背景（2枚目のヒーロー）上では白に反転 */
+.site-header.is-over-dark .brand,
+.site-header.is-over-dark .global-nav a,
+.site-header.is-over-dark .btn-contact,
+.site-header.is-over-dark .nav-toggle span {
+  color: var(--white);
+}
+
+.site-header.is-over-dark .brand-mark {
+  color: var(--white);
+}
+
+.site-header.is-over-dark .btn-contact {
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .header-inner {
@@ -337,7 +358,7 @@ button {
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(16, 16, 16, 0.28);
   border-radius: 999px;
   padding: 9px 22px;
   transition: background 0.4s var(--ease), color 0.4s var(--ease), border-color 0.4s var(--ease);
@@ -349,7 +370,13 @@ button {
   color: var(--white);
 }
 
-.site-header:not(.is-solid) .btn-contact:hover {
+.site-header:not(.is-solid):not(.is-over-dark) .btn-contact:hover {
+  background: var(--ink);
+  color: var(--white);
+  border-color: var(--ink);
+}
+
+.site-header.is-over-dark .btn-contact:hover {
   background: var(--white);
   color: var(--ink);
   border-color: var(--white);
@@ -495,6 +522,149 @@ button {
   letter-spacing: 0.14em !important;
   text-transform: uppercase !important;
   color: var(--ink) !important;
+}
+
+/* ================================================================== *
+   BRAND HERO — ファーストビュー（ロゴが主役 / タイポグラフィのみ）
+   ================================================================== */
+.brand-hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--white);
+  padding: clamp(120px, 20vh, 220px) var(--pad) clamp(72px, 14vh, 160px);
+  overflow: hidden;
+}
+
+.brand-hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* ロゴ（ヘッダーのロゴタイポグラフィをそのまま拡大） */
+.brand-hero-logo {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(4px, 0.7vw, 9px);
+  line-height: 1;
+}
+
+.brand-hero-mark {
+  font-family: var(--logo);
+  font-weight: 800;
+  font-size: clamp(56px, 14.5vw, 320px);
+  letter-spacing: -0.03em;
+  line-height: 0.85;
+  text-transform: lowercase;
+  color: var(--navy);
+}
+
+.brand-hero-sub {
+  display: inline-flex;
+  justify-content: space-between;
+  width: 58%;
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: clamp(12px, 2.4vw, 36px);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+.brand-hero-sub span:last-child {
+  letter-spacing: 0;
+}
+
+/* コピー（ロゴより小さく、余白を大きく取る） */
+.brand-hero-copy {
+  margin-top: clamp(52px, 10vh, 132px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.brand-hero-tagline {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: clamp(19px, 2.4vw, 30px);
+  line-height: 1.95;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+}
+
+.brand-hero-sub-copy {
+  margin-top: clamp(30px, 6vh, 60px);
+  font-size: clamp(13px, 1.15vw, 16px);
+  line-height: 2.25;
+  letter-spacing: 0.08em;
+  color: var(--gray);
+}
+
+/* アニメーション: abby → GROUP → コピー の順にゆっくりフェードイン */
+@keyframes brandFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes brandFadeInSub {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 0.72;
+    transform: none;
+  }
+}
+
+.brand-hero-mark,
+.brand-hero-sub,
+.brand-hero-tagline,
+.brand-hero-sub-copy {
+  opacity: 0;
+  animation: brandFadeIn 1.5s var(--ease) forwards;
+}
+
+.brand-hero-sub {
+  animation-name: brandFadeInSub;
+  animation-delay: 0.85s;
+}
+
+.brand-hero-mark {
+  animation-delay: 0.15s;
+}
+
+.brand-hero-tagline {
+  animation-delay: 1.6s;
+}
+
+.brand-hero-sub-copy {
+  animation-delay: 2.15s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-hero-mark,
+  .brand-hero-tagline,
+  .brand-hero-sub-copy {
+    opacity: 1;
+    animation: none;
+  }
+  .brand-hero-sub {
+    opacity: 0.72;
+    animation: none;
+  }
 }
 
 /* ================================================================== *
@@ -1586,7 +1756,8 @@ button {
  * ================================================================== */
 /* iPhone のノッチ・ホームインジケータを避ける（左右は既存の余白と大きい方を採用） */
 .header-inner,
-.wrap {
+.wrap,
+.brand-hero {
   padding-left: max(var(--pad), env(safe-area-inset-left));
   padding-right: max(var(--pad), env(safe-area-inset-right));
 }

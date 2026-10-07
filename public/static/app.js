@@ -11,18 +11,26 @@
 
   var doc = document;
   var header = doc.getElementById('site-header');
-  var hero = doc.getElementById('hero');
+  var hero = doc.getElementById('hero'); // 2枚目（ダーク）のヒーロー
 
   /* ---------------------------------------------------------------- *
-     Header: solid on scroll / when leaving hero
+     Header: ファーストビュー（明）→ ダークヒーロー → 通常（is-solid）
+     ・明るい背景の上  : 既定（濃色テキスト・透過）
+     ・ダーク背景の上  : is-over-dark（白テキスト）
+     ・ダークを過ぎたら: is-solid（白背景に固定）
    * ---------------------------------------------------------------- */
   function updateHeader() {
     if (!header) return;
-    var threshold = hero ? Math.max(hero.offsetHeight - 120, 80) : 60;
-    if (window.scrollY > threshold) {
-      header.classList.add('is-solid');
+    var h = header.offsetHeight || 64;
+
+    if (hero) {
+      var rect = hero.getBoundingClientRect();
+      var overDark = rect.top <= h && rect.bottom > h;
+      header.classList.toggle('is-over-dark', overDark);
+      header.classList.toggle('is-solid', rect.bottom <= h);
     } else {
-      header.classList.remove('is-solid');
+      header.classList.remove('is-over-dark');
+      header.classList.toggle('is-solid', window.scrollY > 60);
     }
   }
 
