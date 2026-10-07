@@ -180,7 +180,8 @@ const Header = () => (
   </header>
 )
 
-/* ファーストビュー — ロゴが主役。タイポグラフィのみ（写真なし） */
+/* ファーストビュー — 左寄せ・タイポグラフィのみ（写真なし）。
+   ロゴ（ブランド）＋タグライン（ブランドメッセージ）＋事業ドメインを、余白を大きく取って静かに見せる。 */
 const BrandHero = () => (
   <section class="brand-hero" id="brand-hero">
     <div class="brand-hero-inner">
@@ -195,20 +196,19 @@ const BrandHero = () => (
         </span>
       </h1>
 
-      <div class="brand-hero-copy">
-        <p class="brand-hero-tagline">
-          価値をつなぎ、
-          <br />
-          可能性をひらく。
-        </p>
-        <p class="brand-hero-sub-copy">
-          モノに、新たな価値を。
-          <br />
-          人に、新たな可能性を。
-          <br />
-          企業に、新たな成長を。
-        </p>
-      </div>
+      <p class="brand-hero-tagline">
+        価値をつなぎ、
+        <br />
+        可能性をひらく。
+      </p>
+
+      <p class="brand-hero-domains">
+        <span>REUSE</span>
+        <span class="sep" aria-hidden="true">/</span>
+        <span>AUCTION</span>
+        <span class="sep" aria-hidden="true">/</span>
+        <span>HUMAN RESOURCES</span>
+      </p>
     </div>
   </section>
 )

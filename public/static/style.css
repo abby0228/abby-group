@@ -525,42 +525,45 @@ button {
 }
 
 /* ================================================================== *
-   BRAND HERO — ファーストビュー（ロゴが主役 / タイポグラフィのみ）
+   BRAND HERO — ファーストビュー（左寄せ / タイポグラフィのみ / 余白重視）
+   ロゴを「大きく見せる」のではなく、ロゴ・コピー・余白のバランスを最優先。
    ================================================================== */
 .brand-hero {
   position: relative;
   min-height: 100svh;
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  justify-content: flex-start;
+  text-align: left;
   background: var(--white);
-  padding: clamp(120px, 20vh, 220px) var(--pad) clamp(72px, 14vh, 160px);
+  padding: clamp(120px, 19vh, 210px) var(--pad) clamp(80px, 14vh, 170px);
   overflow: hidden;
 }
 
 .brand-hero-inner {
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 100%;
+  align-items: flex-start;
 }
 
-/* ロゴ（ヘッダーのロゴタイポグラフィをそのまま拡大） */
+/* --- ブランドロゴ（ヘッダーと同一タイポグラフィ。旧比 約30%縮小） --- */
 .brand-hero-logo {
   display: inline-flex;
   flex-direction: column;
-  align-items: center;
-  gap: clamp(4px, 0.7vw, 9px);
+  align-items: flex-start;
+  gap: clamp(5px, 0.75vw, 12px);
   line-height: 1;
 }
 
 .brand-hero-mark {
   font-family: var(--logo);
   font-weight: 800;
-  font-size: clamp(56px, 14.5vw, 320px);
+  font-size: clamp(40px, 9.2vw, 206px);
   letter-spacing: -0.03em;
-  line-height: 0.85;
+  line-height: 0.88;
   text-transform: lowercase;
   color: var(--navy);
 }
@@ -571,8 +574,8 @@ button {
   width: 58%;
   font-family: var(--sans);
   font-weight: 400;
-  font-size: clamp(12px, 2.4vw, 36px);
-  letter-spacing: 0.02em;
+  font-size: clamp(10px, 1.55vw, 24px);
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--navy);
 }
@@ -581,29 +584,34 @@ button {
   letter-spacing: 0;
 }
 
-/* コピー（ロゴより小さく、余白を大きく取る） */
-.brand-hero-copy {
-  margin-top: clamp(52px, 10vh, 132px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
+/* --- ブランドメッセージ（ロゴと明確に役割分担：細め・余白大） --- */
 .brand-hero-tagline {
+  margin-top: clamp(40px, 8vh, 108px);
   font-family: var(--sans);
-  font-weight: 500;
-  font-size: clamp(19px, 2.4vw, 30px);
+  font-weight: 400;
+  font-size: clamp(19px, 2.3vw, 29px);
   line-height: 1.95;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.045em;
   color: var(--ink);
 }
 
-.brand-hero-sub-copy {
-  margin-top: clamp(30px, 6vh, 60px);
-  font-size: clamp(13px, 1.15vw, 16px);
-  line-height: 2.25;
-  letter-spacing: 0.08em;
+/* --- 事業ドメイン（小さな英字ラベル。控えめな区切りとして） --- */
+.brand-hero-domains {
+  margin-top: clamp(44px, 8vh, 104px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(10px, 1.4vw, 20px);
+  font-family: var(--sans);
+  font-size: clamp(10px, 1vw, 12px);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   color: var(--gray);
+}
+
+.brand-hero-domains .sep {
+  color: var(--gray-soft);
 }
 
 /* アニメーション: abby → GROUP → コピー の順にゆっくりフェードイン */
@@ -632,7 +640,7 @@ button {
 .brand-hero-mark,
 .brand-hero-sub,
 .brand-hero-tagline,
-.brand-hero-sub-copy {
+.brand-hero-domains {
   opacity: 0;
   animation: brandFadeIn 1.5s var(--ease) forwards;
 }
@@ -650,14 +658,14 @@ button {
   animation-delay: 1.6s;
 }
 
-.brand-hero-sub-copy {
-  animation-delay: 2.15s;
+.brand-hero-domains {
+  animation-delay: 2.1s;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .brand-hero-mark,
   .brand-hero-tagline,
-  .brand-hero-sub-copy {
+  .brand-hero-domains {
     opacity: 1;
     animation: none;
   }
@@ -1900,6 +1908,20 @@ textarea {
 
   .hero-sub {
     font-size: 16px;
+  }
+
+  /* ファーストビュー（左寄せ）: スマホは余白を少しだけ詰める */
+  .brand-hero {
+    padding-top: clamp(100px, 19vh, 150px);
+    padding-bottom: clamp(60px, 12vh, 100px);
+  }
+
+  .brand-hero-tagline {
+    margin-top: clamp(32px, 6.5vh, 56px);
+  }
+
+  .brand-hero-domains {
+    margin-top: clamp(30px, 6vh, 52px);
   }
 
   .scroll-hint {
