@@ -13,6 +13,8 @@
   --paper: #fbfaf8;
   --ink: #101010;
   --charcoal: #2a2a2a;
+  /* logo navy (deep, near-black) */
+  --navy: #0f1a2e;
   --gray: #6b6b6b;
   --gray-soft: #9a9a9a;
   --line: #e4e2dd;
@@ -25,6 +27,9 @@
     Meiryo, 'Segoe UI', sans-serif;
   /* English display */
   --serif: 'Cormorant Garamond', 'Times New Roman', Times, serif;
+  /* Logo — heavy geometric sans (lowercase 'abby') */
+  --logo: 'Poppins', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN',
+    'Yu Gothic', Meiryo, 'Segoe UI', sans-serif;
 
   --pad: clamp(24px, 5vw, 96px);
   --max: 1280px;
@@ -236,6 +241,11 @@ button {
   color: var(--ink);
 }
 
+/* logo uses the deep navy on light (solid) backgrounds */
+.site-header.is-solid .brand-mark {
+  color: var(--navy);
+}
+
 .site-header.is-solid .btn-contact {
   color: var(--ink);
   border-color: var(--ink);
@@ -253,25 +263,29 @@ button {
 .brand {
   display: inline-flex;
   align-items: baseline;
-  gap: 8px;
+  gap: 9px;
   line-height: 1;
   flex-shrink: 0;
 }
 
+/* "abby" — very heavy geometric sans, lowercase, tight tracking */
 .brand-mark {
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: 26px;
-  letter-spacing: 0.01em;
+  font-family: var(--logo);
+  font-weight: 800;
+  font-size: 27px;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  text-transform: lowercase;
 }
 
+/* "GROUP" — small, light, wide tracking */
 .brand-sub {
   font-family: var(--sans);
-  font-weight: 500;
-  font-size: 10px;
-  letter-spacing: 0.3em;
+  font-weight: 400;
+  font-size: 9px;
+  letter-spacing: 0.42em;
   text-transform: uppercase;
-  opacity: 0.75;
+  opacity: 0.72;
 }
 
 .global-nav {
@@ -1118,18 +1132,18 @@ button {
 .footer-logo {
   display: inline-flex;
   align-items: baseline;
-  gap: 8px;
+  gap: 9px;
   margin-bottom: 26px;
 }
 
 .footer-logo .brand-mark {
-  font-size: 30px;
-  font-weight: 600;
+  font-size: 31px;
+  font-weight: 800;
 }
 
 .footer-logo .brand-sub {
-  font-size: 10px;
-  letter-spacing: 0.3em;
+  font-size: 9px;
+  letter-spacing: 0.42em;
   text-transform: uppercase;
   opacity: 0.7;
 }
@@ -1390,6 +1404,10 @@ button {
   .site-header.menu-open .brand,
   .site-header.menu-open .nav-toggle span {
     color: var(--ink);
+  }
+
+  .site-header.menu-open .brand-mark {
+    color: var(--navy);
   }
 
   .biz-inner {
