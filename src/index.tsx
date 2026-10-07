@@ -36,8 +36,8 @@ const COMPANIES: Company[] = [
     url: 'https://abby-inc.com/',
     external: true,
     body: [
-      'ブランド品・ジュエリー・時計などを中心に、買取・販売・卸を展開するリユース事業。',
-      '一つひとつのモノが持つ価値を見極め、次に必要とする人へつないでいきます。',
+      'ブランド品・ジュエリー・時計を中心に、買取・販売・卸を展開するリユース事業。',
+      'モノが持つ価値を見極め、次に必要とする人へつなぎます。',
     ],
     image: '/static/img/biz-reuse.jpg',
     imageAlt: '時計・ジュエリー・ブランド品（モノトーン）',
@@ -52,7 +52,7 @@ const COMPANIES: Company[] = [
     external: false,
     body: [
       'ブランドジュエリー専門オークション「Abb auction byOKURA」を運営。',
-      '売り手と買い手、商品と新しい市場をつなぎ、リユース市場に新たな流通を生み出します。',
+      '売り手と買い手、商品と市場をつなぎ、新たな流通を生み出します。',
     ],
     image: '/static/img/biz-auction.jpg',
     imageAlt: 'オークションのための上質な空間（モノトーン）',
@@ -66,8 +66,7 @@ const COMPANIES: Company[] = [
     url: 'https://abby-hr.com/',
     external: true,
     body: [
-      '営業支援で培った人材選定・育成・マネジメントのノウハウを活かし、',
-      '営業支援・人材派遣・人材紹介などの人材ソリューションを提供します。',
+      '営業支援で培ったノウハウを活かし、営業支援・人材派遣・人材紹介などの人材ソリューションを提供します。',
       '人の可能性と企業の成長をつなぎます。',
     ],
     image: '/static/img/biz-hr.jpg',
@@ -78,32 +77,15 @@ const COMPANIES: Company[] = [
 
 type NewsItem = { date: string; category: string; title: string; url: string }
 
-const NEWS: NewsItem[] = [
-  {
-    date: '2024.00.00',
-    category: 'GROUP',
-    title: 'abby GROUP グループポータルサイトを公開しました。（サンプル）',
-    url: '#',
-  },
-  {
-    date: '2024.00.00',
-    category: 'REUSE',
-    title: '株式会社abby に関するお知らせが入ります。（サンプル）',
-    url: '#',
-  },
-  {
-    date: '2024.00.00',
-    category: 'AUCTION',
-    title: '株式会社Abby auction に関するお知らせが入ります。（サンプル）',
-    url: '#',
-  },
-  {
-    date: '2024.00.00',
-    category: 'HUMAN RESOURCES',
-    title: '株式会社Abb Solution に関するお知らせが入ります。（サンプル）',
-    url: '#',
-  },
-]
+/*
+ * NEWS は CMS / D1 等に差し替え可能。
+ * 配列が空の場合、NEWSセクションとナビの NEWS 項目は自動的に非表示になります。
+ * 追加する場合は下記の形式で項目を入れてください。
+ *   { date: '2025.01.01', category: 'GROUP', title: 'お知らせのタイトル', url: '/news/xxx' }
+ */
+const NEWS: NewsItem[] = []
+
+const HAS_NEWS = NEWS.length > 0
 
 /* ------------------------------------------------------------------ *
  * パーツ
@@ -134,7 +116,7 @@ const Header = () => (
         <a href="/#business">BUSINESS</a>
         <a href="/#philosophy">PHILOSOPHY</a>
         <a href="/#companies">GROUP COMPANIES</a>
-        <a href="/#news">NEWS</a>
+        {HAS_NEWS ? <a href="/#news">NEWS</a> : null}
       </nav>
 
       <div class="header-cta">
@@ -154,7 +136,7 @@ const Header = () => (
       <a href="/#business">BUSINESS</a>
       <a href="/#philosophy">PHILOSOPHY</a>
       <a href="/#companies">GROUP COMPANIES</a>
-      <a href="/#news">NEWS</a>
+      {HAS_NEWS ? <a href="/#news">NEWS</a> : null}
       <a href="/#contact">CONTACT</a>
     </div>
   </header>
@@ -213,26 +195,13 @@ const About = () => (
 
       <div class="about-grid">
         <div class="about-body reveal">
-          <p>
-            価値あるモノが、
-            <br />
-            必要とする人へ渡っていくこと。
-          </p>
-          <p>
-            一人ひとりが、
-            <br />
-            自分の可能性を活かせる場所と出会うこと。
-          </p>
-          <p>
-            企業が、
-            <br />
-            新たな人や機会と出会い、成長していくこと。
-          </p>
+          <p>価値あるモノが、必要とする人へ渡っていくこと。</p>
+          <p>一人ひとりが、自分の可能性を活かせる場所と出会うこと。</p>
+          <p>企業が、新たな人や機会と出会い、成長していくこと。</p>
           <p class="about-lead">
-            abby GROUPは、リユース、オークション、人材という異なる領域から、モノ・人・企業が持つ価値を見つけ、新たな可能性へとつないでいます。
-          </p>
-          <p class="about-lead">
-            事業領域にとらわれることなく、社会に必要とされる価値を生み出し続けます。
+            abby GROUPは、リユース・オークション・人材という領域から、
+            <br />
+            モノ・人・企業の価値を見つけ、新たな可能性へつないでいきます。
           </p>
         </div>
 
@@ -284,12 +253,7 @@ const Business = () => (
                 <span>VIEW WEBSITE</span>
                 <ArrowUpRight />
               </a>
-            ) : (
-              <span class="cta-line is-pending">
-                <span>VIEW WEBSITE</span>
-                <span class="pending-note">準備中</span>
-              </span>
-            )}
+            ) : null}
           </div>
         </div>
       </article>
@@ -297,42 +261,39 @@ const Business = () => (
   </section>
 )
 
-const ValueCycle = () => {
-  const steps = [
-    { cat: 'REUSE', label: 'リユース事業', text: '価値を見つける。' },
-    { cat: 'AUCTION', label: 'オークション事業', text: '価値を市場につなぐ。' },
-    { cat: 'HUMAN RESOURCES', label: '人材ソリューション事業', text: '人の力で事業を動かす。' },
+const ValueCreation = () => {
+  const values = [
+    { en: 'VALUE OF THINGS', jp: 'モノの価値', text: '見極め、次の人へつなぐ。' },
+    { en: 'VALUE OF MARKET', jp: '市場の価値', text: 'つなぎ、新しい流通を生む。' },
+    { en: 'VALUE OF PEOPLE', jp: '人の価値', text: '引き出し、成長へつなぐ。' },
   ]
   return (
     <section class="section cycle" id="cycle">
       <div class="wrap">
         <header class="sec-head reveal">
-          <p class="eyebrow">OUR VALUE CYCLE</p>
+          <p class="eyebrow">OUR VALUE CREATION</p>
           <h2 class="sec-title">
-            価値を見つけ、
+            3つの価値を、
             <br />
-            価値をつなぎ、
-            <br />
-            可能性を広げる。
+            生み出しつづける。
           </h2>
         </header>
 
         <ol class="cycle-flow">
-          {steps.map((s, i) => (
+          {values.map((s, i) => (
             <li class="cycle-step reveal" style={`--i:${i}`}>
               <span class="cycle-dot" aria-hidden="true"></span>
-              <p class="cycle-cat">{s.cat}</p>
-              <p class="cycle-label">{s.label}</p>
+              <p class="cycle-cat">{s.en}</p>
+              <p class="cycle-label">{s.jp}</p>
               <p class="cycle-text">{s.text}</p>
             </li>
           ))}
         </ol>
 
         <p class="cycle-out reveal">
-          <span class="cycle-out-x">×</span>
-          3つの事業が循環し、
+          モノ・市場・人。
           <br />
-          新しい価値を生み出していく。
+          abby GROUPは、それぞれの価値を生み出すグループです。
         </p>
       </div>
     </section>
@@ -341,64 +302,56 @@ const ValueCycle = () => {
 
 const Philosophy = () => (
   <section class="section philosophy" id="philosophy">
-    <div class="philosophy-media" aria-hidden="true">
-      <img src="/static/img/philosophy-facade.jpg" alt="" loading="lazy" />
-    </div>
-    <div class="wrap philosophy-inner">
-      <p class="eyebrow light reveal">PHILOSOPHY</p>
-      <h2 class="philosophy-title reveal">
-        価値は、
-        <br />
-        見つけることで変わる。
-      </h2>
-      <div class="philosophy-body reveal">
-        <p>
-          価値がないのではなく、
+    <div class="philosophy-inner">
+      <div class="wrap">
+        <p class="eyebrow light reveal">PHILOSOPHY</p>
+        <h2 class="philosophy-title reveal">
+          価値は、
           <br />
-          まだ、その価値が見つけられていないだけかもしれない。
-        </p>
-        <p>
-          それは、
-          <br />
-          モノも、人も、事業も同じです。
-        </p>
-        <p>
-          私たちは、
-          <br />
-          一つひとつの価値と向き合い、
-          <br />
-          その可能性を最大限に引き出すことで、
-        </p>
-        <p>
-          新しい市場、
-          <br />
-          新しいキャリア、
-          <br />
-          新しい未来を生み出していきます。
-        </p>
-      </div>
-    </div>
-  </section>
-)
+          見つけることで変わる。
+        </h2>
 
-const MissionVision = () => (
-  <section class="section mv" id="mission">
-    <div class="wrap">
-      <div class="mv-row reveal">
-        <p class="mv-label">MISSION</p>
-        <p class="mv-text">
-          価値をつなぎ、
-          <br />
-          新しい可能性を生み出す。
-        </p>
+        <div class="philosophy-body reveal">
+          <p>
+            価値がないのではなく、
+            <br />
+            まだ、その価値が見つけられていないだけかもしれない。
+          </p>
+          <p>
+            それは、モノも、人も、事業も同じです。
+          </p>
+          <p>
+            一つひとつの価値と向き合い、
+            <br />
+            その可能性を最大限に引き出すことで、
+          </p>
+          <p>
+            新しい市場、新しいキャリア、
+            <br />
+            新しい未来を生み出していきます。
+          </p>
+        </div>
       </div>
-      <div class="mv-row reveal">
-        <p class="mv-label">VISION</p>
-        <p class="mv-text">
-          世界中の価値が、
-          <br />
-          正しく巡る社会へ。
-        </p>
+
+      <div class="mv-dark" id="mission">
+        <div class="wrap">
+          <div class="mv-row reveal">
+            <p class="mv-label">MISSION</p>
+            <p class="mv-text">
+              価値をつなぎ、
+              <br />
+              新しい可能性を生み出す。
+            </p>
+          </div>
+          <div class="mv-row reveal">
+            <p class="mv-label">VISION</p>
+            <p class="mv-text">
+              世界中の価値が、
+              <br />
+              正しく巡る社会へ。
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -406,9 +359,9 @@ const MissionVision = () => (
 
 const GroupCompanies = () => {
   const list = [
-    { name: '株式会社abby', cat: 'REUSE', url: 'https://abby-inc.com/', note: '' },
-    { name: '株式会社Abby auction', cat: 'AUCTION', url: '', note: 'Abb auction byOKURAを運営' },
-    { name: '株式会社Abb Solution', cat: 'HUMAN RESOURCES', url: 'https://abby-hr.com/', note: '' },
+    { name: '株式会社abby', cat: 'REUSE', url: 'https://abby-inc.com/' },
+    { name: '株式会社Abby auction', cat: 'AUCTION', url: '' },
+    { name: '株式会社Abb Solution', cat: 'HUMAN RESOURCES', url: 'https://abby-hr.com/' },
   ]
   return (
     <section class="section companies" id="companies">
@@ -422,27 +375,18 @@ const GroupCompanies = () => {
           {list.map((c) => (
             <li class="company-row reveal">
               <div class="company-main">
-                <p class="company-cat">{c.cat}</p>
                 <p class="company-name">{c.name}</p>
-                {c.note ? <p class="company-note">{c.note}</p> : null}
+                <p class="company-cat">{c.cat}</p>
               </div>
               {c.url ? (
                 <a class="company-link" href={c.url} target="_blank" rel="noopener noreferrer">
-                  <span class="company-link-url">{c.url.replace('https://', '').replace(/\/$/, '')}</span>
+                  <span>VIEW WEBSITE</span>
                   <ArrowUpRight />
                 </a>
-              ) : (
-                <span class="company-link is-pending">
-                  <span class="company-link-url">準備中</span>
-                </span>
-              )}
+              ) : null}
             </li>
           ))}
         </ul>
-
-        <p class="companies-note reveal">
-          株式会社abby、株式会社Abby auction、株式会社Abb Solutionは、それぞれ独立した法人です。
-        </p>
       </div>
     </section>
   )
@@ -467,16 +411,11 @@ const Future = () => (
           既存の事業を大きくすることだけではありません。
         </p>
         <p>
-          リユース市場のさらなる拡大。
+          国内外への事業展開。
           <br />
-          オークションを通じた国内外への流通。
+          新しい市場への挑戦。
           <br />
-          人材領域における全国展開。
-        </p>
-        <p>
-          ブルーカラー・海外人材など、
-          <br />
-          新たな人材市場への挑戦。
+          既存領域を越えた価値創出。
         </p>
         <p>
           社会の変化から生まれる課題を捉え、
@@ -498,41 +437,43 @@ const Future = () => (
   </section>
 )
 
-const News = () => (
-  <section class="section news" id="news">
-    <div class="wrap">
-      <header class="sec-head reveal">
-        <p class="eyebrow">NEWS</p>
-        <h2 class="sec-title">お知らせ</h2>
-      </header>
+const News = () => {
+  // ニュースが未登録の場合はセクション自体を出力しない
+  if (!HAS_NEWS) return null
 
-      <ul class="news-list">
-        {NEWS.map((n) => (
-          <li class="news-row reveal">
-            <a href={n.url}>
-              <span class="news-date">{n.date}</span>
-              <span class="news-cat">{n.category}</span>
-              <span class="news-title">{n.title}</span>
-              <span class="news-arrow" aria-hidden="true">
-                <ArrowUpRight />
-              </span>
-            </a>
-          </li>
-        ))}
-      </ul>
+  return (
+    <section class="section news" id="news">
+      <div class="wrap">
+        <header class="sec-head reveal">
+          <p class="eyebrow">NEWS</p>
+          <h2 class="sec-title">お知らせ</h2>
+        </header>
 
-      <div class="news-foot reveal">
-        <a class="cta-line" href="#news">
-          <span>VIEW ALL</span>
-          <ArrowIcon />
-        </a>
-        <p class="news-note">
-          ※ 現在はサンプル表示です。CMSやデータソースに差し替えやすい構成で実装しています。
-        </p>
+        <ul class="news-list">
+          {NEWS.map((n) => (
+            <li class="news-row reveal">
+              <a href={n.url}>
+                <span class="news-date">{n.date}</span>
+                <span class="news-cat">{n.category}</span>
+                <span class="news-title">{n.title}</span>
+                <span class="news-arrow" aria-hidden="true">
+                  <ArrowUpRight />
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <div class="news-foot reveal">
+          <a class="cta-line" href="#news">
+            <span>VIEW ALL</span>
+            <ArrowIcon />
+          </a>
+        </div>
       </div>
-    </div>
-  </section>
-)
+    </section>
+  )
+}
 
 const Contact = () => (
   <section class="section contact" id="contact">
@@ -587,9 +528,11 @@ const Footer = () => (
             <li>
               <a href="/#companies">GROUP COMPANIES</a>
             </li>
-            <li>
-              <a href="/#news">NEWS</a>
-            </li>
+            {HAS_NEWS ? (
+              <li>
+                <a href="/#news">NEWS</a>
+              </li>
+            ) : null}
             <li>
               <a href="/#contact">CONTACT</a>
             </li>
@@ -607,7 +550,7 @@ const Footer = () => (
                 </a>
               </li>
               <li>
-                <span class="is-pending">株式会社Abby auction</span>
+                <span class="is-muted">株式会社Abby auction</span>
               </li>
               <li>
                 <a href="https://abby-hr.com/" target="_blank" rel="noopener noreferrer">
@@ -640,9 +583,8 @@ const HomePage = () => (
       <Hero />
       <About />
       <Business />
-      <ValueCycle />
+      <ValueCreation />
       <Philosophy />
-      <MissionVision />
       <GroupCompanies />
       <Future />
       <News />

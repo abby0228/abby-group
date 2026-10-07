@@ -26,15 +26,14 @@ abby GROUP（株式会社abby／株式会社Abby auction／株式会社Abb Solut
 ## 現在の機能（実装済み）
 
 - 固定ヘッダー（スクロールで白背景に切替、モバイルはハンバーガーメニュー）
-- HERO（都市・建築のビジュアル＋メインコピー＋サブコピー＋説明＋CTA）
-- ABOUT（大きな余白の本文＋縦長ビジュアル）
-- OUR BUSINESS（3事業を1画面ずつ大きなビジュアルで紹介／01 REUSE・02 AUCTION・03 HUMAN RESOURCES）
-- OUR VALUE CYCLE（3事業を1本のラインでつなぐストーリー表示）
-- PHILOSOPHY（全面ビジュアル＋大見出し＋本文）
-- MISSION / VISION（大きな文字と余白の2段組）
-- GROUP COMPANIES（会社名・事業カテゴリー・リンクのみのシンプル一覧＋独立法人の注記）
+- HERO（都市・建築のビジュアル＋メインコピー＋サブコピー＋説明＋CTA。コピー視認性のため濃いスクリムを重ねています）
+- ABOUT（本文を約20%削減し余白を拡大＋縦長ビジュアル）
+- OUR BUSINESS（3事業を1画面ずつ**大きなビジュアル**で紹介／01 REUSE・02 AUCTION・03 HUMAN RESOURCES。写真側を広く確保）
+- OUR VALUE CREATION（**モノ・市場・人** の3つの価値を生み出すグループとして表示／VALUE OF THINGS・VALUE OF MARKET・VALUE OF PEOPLE）
+- PHILOSOPHY（**BLACK背景**の印象的なセクション。大きなタイポグラフィ＋余白。MISSION / VISIONも同世界観の黒背景）
+- GROUP COMPANIES（会社名・事業カテゴリー・VIEW WEBSITE のみのシンプル一覧）
 - OUR FUTURE（大見出し＋本文＋ `REUSE × AUCTION × HUMAN RESOURCES × NEXT`）
-- NEWS（DATE / CATEGORY / TITLE の一覧。CMS差し替えしやすいデータ構造）
+- NEWS（**データが空の場合はセクションごと非表示**。CMS差し替えしやすいデータ構造）
 - CONTACT（大見出し＋本文＋CONTACT US ボタン → /contact）
 - スクロール連動のフェードイン（`prefers-reduced-motion` 対応）
 - ページ遷移オーバーレイ（同一ページ内アンカーには適用しない）
@@ -60,7 +59,7 @@ abby GROUP（株式会社abby／株式会社Abby auction／株式会社Abb Solut
 ## データ構造
 
 - `src/index.tsx` 内の `COMPANIES` 配列 … 3事業のデータ（番号・カテゴリー・会社名・本文・画像・リンク）
-- `NEWS` 配列 … ニュース項目（date / category / title / url）
+- `NEWS` 配列 … ニュース項目（date / category / title / url）。**空配列のとき NEWSセクションとナビの NEWS は自動的に非表示**
 - D1 テーブル `contacts` … お問い合わせ保存先（`DB` バインディング設定時のみ）
 
 ## 使用技術
@@ -68,7 +67,7 @@ abby GROUP（株式会社abby／株式会社Abby auction／株式会社Abb Solut
 - **Hono** + TypeScript（Cloudflare Pages / Workers）
 - ビルド: Vite（`@hono/vite-build`）
 - スタイル: 自前CSS（`public/static/style.css`）— Tailwind等は不使用
-- フォント: Google Fonts（Inter / Shippori Mincho）
+- フォント: Google Fonts（**Noto Sans JP**＝日本語本文・見出し／**Cormorant Garamond**＝英字ディスプレイ／Inter＝英字UI）
 - 画像: `public/static/img/`（モノトーン加工のCC/PDライセンス素材）
 - 永続化: Cloudflare D1（お問い合わせのみ）
 
@@ -99,10 +98,19 @@ curl http://localhost:3000
 pm2 logs webapp --nostream
 ```
 
+## タイポグラフィ / 可読性の方針
+
+- 日本語は **Noto Sans JP**。本文 400〜500 / 16〜17px / 行間 1.9〜2.0
+- 日本語の大見出しは 500〜600（細すぎるフォント・明朝・極端な letter-spacing は使用しない）
+- 英字セクション見出しは **Cormorant Garamond**（上品な Serif）
+- 本文の最大横幅は **約620px**（画面いっぱいに横長表示しない）
+- 写真の上に文字を置く場合はスクリムでコントラストを確保
+- セクション上下の余白は大きめに確保
+
 ## 未実装 / 今後の推奨
 
-- 株式会社Abby auction の公式サイトURL確定 → `COMPANIES` とフッターの「準備中」を差し替え
-- NEWSのCMS連携（現状は `NEWS` 配列。D1/KV/ヘッドレスCMSへ差し替え可能）
+- 株式会社Abby auction の公式サイトURL確定 → `COMPANIES` の `url` を設定すると VIEW WEBSITE が自動表示されます（未設定時はボタン非表示）
+- NEWSの登録 / CMS連携（`NEWS` 配列が空の間はセクション非表示。D1/KV/ヘッドレスCMSへ差し替え可能）
 - お問い合わせのメール通知（Resend / SendGrid 等の外部API連携）
 - 会社概要・各社詳細ページ、採用ページの追加
 - OGP画像の設定（`renderer.tsx`）
