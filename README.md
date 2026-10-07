@@ -119,8 +119,16 @@ pm2 logs webapp --nostream
 
 ## デプロイ
 
-- **プラットフォーム**: Cloudflare Pages
-- **ステータス**: ローカル動作確認済み（未デプロイ）
+- **プラットフォーム**: Cloudflare Pages（ご自身の Cloudflare アカウント）
+- **プロジェクト名**: `abby-group`
+- **ステータス**: ✅ デプロイ済み（公開中）
+- **本番URL**: https://abby-group.pages.dev
+- **GitHub**: https://github.com/abby0228/abby-group
+- **再デプロイ**:
+  ```bash
+  npm run build
+  npx wrangler pages deploy dist --project-name abby-group --branch main
+  ```
 - **備考**: D1を利用する場合、`wrangler.jsonc` の `d1_databases` を有効化し、`DB` をバインドしてください。
 
 ---
