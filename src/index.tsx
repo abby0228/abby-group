@@ -40,7 +40,7 @@ const COMPANIES: Company[] = [
       'モノが持つ価値を見極め、次に必要とする人へつなぎます。',
     ],
     image: '/static/img/biz-reuse.jpg',
-    imageAlt: '時計・ジュエリー・ブランド品（モノトーン）',
+    imageAlt: '大理石の上に置かれた高級時計とダイヤモンドリング',
     lead: 'モノの価値を見極め、\n次に必要とする人へ。',
   },
   {
@@ -55,7 +55,7 @@ const COMPANIES: Company[] = [
       '売り手と買い手、商品と市場をつなぎ、新たな流通を生み出します。',
     ],
     image: '/static/img/biz-auction.jpg',
-    imageAlt: 'オークションのための上質な空間（モノトーン）',
+    imageAlt: '手袋をした手でルーペを使い、ジュエリーを検品・鑑定する様子',
     lead: '価値を市場につなぎ、\n新たな流通を生み出す。',
   },
   {
@@ -70,7 +70,7 @@ const COMPANIES: Company[] = [
       '人の可能性と企業の成長をつなぎます。',
     ],
     image: '/static/img/biz-hr.jpg',
-    imageAlt: 'ビジネス・チーム・打ち合わせの様子',
+    imageAlt: '現代的なオフィスで商談・提案を行うビジネスパーソン',
     lead: '人の可能性と、\n企業の成長をつなぐ。',
   },
 ]
@@ -144,11 +144,6 @@ const Header = () => (
 
 const Hero = () => (
   <section class="hero" id="hero">
-    <div class="hero-media">
-      <img src="/static/img/hero-architecture.jpg" alt="都市と建築が織りなす現代的な風景" loading="eager" />
-      <span class="hero-scrim" aria-hidden="true"></span>
-    </div>
-
     <div class="hero-content">
       <p class="eyebrow light">abby GROUP</p>
       <h1 class="hero-title">
@@ -204,10 +199,6 @@ const About = () => (
             モノ・人・企業の価値を見つけ、新たな可能性へつないでいきます。
           </p>
         </div>
-
-        <figure class="about-figure reveal">
-          <img src="/static/img/about-city.jpg" alt="都市のビルディング（モノトーン）" loading="lazy" />
-        </figure>
       </div>
     </div>
   </section>
@@ -394,9 +385,6 @@ const GroupCompanies = () => {
 
 const Future = () => (
   <section class="section future" id="future">
-    <div class="future-media" aria-hidden="true">
-      <img src="/static/img/future-stair.jpg" alt="" loading="lazy" />
-    </div>
     <div class="wrap future-inner">
       <p class="eyebrow light reveal">OUR FUTURE</p>
       <h2 class="future-title reveal">

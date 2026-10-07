@@ -21,18 +21,18 @@ abby GROUP（株式会社abby／株式会社Abby auction／株式会社Abb Solut
 - 3社はそれぞれ **独立した法人** です。親会社・子会社・資本関係・出資比率などの関係は記載していません。
 - 売上・社員数・設立年・拠点数・実績・代表者メッセージ・お客様の声などの**推測／生成は行っていません**。
 - 「業界No.1」等の根拠のない表現は使用していません。
-- 各社の公式サイトリンクのみ掲載しています（株式会社Abby auctionのリンクは未確定のため「準備中」表示）。
+- 各社の公式サイトリンクのみ掲載しています（株式会社Abby auctionのリンクは未確定のため、リンクボタンは非表示）。
 
 ## 現在の機能（実装済み）
 
 - 固定ヘッダー（スクロールで白背景に切替、モバイルはハンバーガーメニュー）
-- HERO（都市・建築のビジュアル＋メインコピー＋サブコピー＋説明＋CTA。コピー視認性のため濃いスクリムを重ねています）
-- ABOUT（本文を約20%削減し余白を拡大＋縦長ビジュアル）
-- OUR BUSINESS（3事業を1画面ずつ**大きなビジュアル**で紹介／01 REUSE・02 AUCTION・03 HUMAN RESOURCES。写真側を広く確保）
+- HERO（**写真なし／黒背景＋タイポグラフィのみ**。メインコピーを主役にしたレイアウト）
+- ABOUT（**写真なし／タイポグラフィ＋余白のみ**。本文を約20%削減）
+- OUR BUSINESS（3事業を1画面ずつ**大きな写真1枚**で紹介／01 REUSE・02 AUCTION・03 HUMAN RESOURCES。写真側を広く確保）
 - OUR VALUE CREATION（**モノ・市場・人** の3つの価値を生み出すグループとして表示／VALUE OF THINGS・VALUE OF MARKET・VALUE OF PEOPLE）
-- PHILOSOPHY（**BLACK背景**の印象的なセクション。大きなタイポグラフィ＋余白。MISSION / VISIONも同世界観の黒背景）
+- PHILOSOPHY（**写真なし／BLACK背景**の印象的なセクション。大きなタイポグラフィ＋余白。MISSION / VISIONも同世界観の黒背景）
 - GROUP COMPANIES（会社名・事業カテゴリー・VIEW WEBSITE のみのシンプル一覧）
-- OUR FUTURE（大見出し＋本文＋ `REUSE × AUCTION × HUMAN RESOURCES × NEXT`）
+- OUR FUTURE（**写真なし／黒背景＋タイポグラフィのみ**。大見出し＋本文＋ `REUSE × AUCTION × HUMAN RESOURCES × NEXT`）
 - NEWS（**データが空の場合はセクションごと非表示**。CMS差し替えしやすいデータ構造）
 - CONTACT（大見出し＋本文＋CONTACT US ボタン → /contact）
 - スクロール連動のフェードイン（`prefers-reduced-motion` 対応）
@@ -68,7 +68,7 @@ abby GROUP（株式会社abby／株式会社Abby auction／株式会社Abb Solut
 - ビルド: Vite（`@hono/vite-build`）
 - スタイル: 自前CSS（`public/static/style.css`）— Tailwind等は不使用
 - フォント: Google Fonts（**Noto Sans JP**＝日本語本文・見出し／**Cormorant Garamond**＝英字ディスプレイ／Inter＝英字UI）
-- 画像: `public/static/img/`（モノトーン加工のCC/PDライセンス素材）
+- 画像: `public/static/img/`（**各事業の実態を伝えるオリジナル生成画像3枚のみ**。AI生成）
 - 永続化: Cloudflare D1（お問い合わせのみ）
 
 ## ディレクトリ構成
@@ -82,7 +82,7 @@ webapp/
 │   ├── style.css        # デザイン一式
 │   ├── app.js           # ヘッダー・ナビ・reveal・フォーム送信
 │   ├── favicon.svg
-│   └── img/             # 画像素材（モノトーン）
+│   └── img/             # 事業写真3枚（biz-reuse / biz-auction / biz-hr）
 ├── ecosystem.config.cjs # PM2設定
 ├── wrangler.jsonc       # Cloudflare Pages設定
 └── vite.config.ts
@@ -98,14 +98,24 @@ curl http://localhost:3000
 pm2 logs webapp --nostream
 ```
 
+## 写真・ビジュアルの方針
+
+- **写真は3枚のみ**（各事業1枚）。1枚を大きく見せ、白／黒／グレーを基調にモノトーン加工。
+- **HERO / ABOUT / PHILOSOPHY / OUR FUTURE は写真を置かず**、タイポグラフィ・余白・コントラストで構成（黒または白ベースでコピーを主役に）。
+- 都市・建築・会議・抽象コーポレート・汎用オフィス写真は使用しない。各事業の実態を伝えるビジュアルのみ：
+  - **REUSE**: 大理石・自然光のもとで上質な時計＋ジュエリーを撮影した商品ビジュアル
+  - **AUCTION**: 手袋＋ルーペでブランドジュエリーを検品・鑑定する様子（「入札」ではなく確認・査定のニュアンス）
+  - **HUMAN RESOURCES**: 現代的で洗練されたオフィスでの商談・提案・相談のシーン（汎用の会議写真は避ける）
+- トーン: 無料素材感を排し、Editorial / Premium / Corporate。ゴールドは英字ラベルやドットなど**控えめなアクセント**としてのみ使用。
+
 ## タイポグラフィ / 可読性の方針
 
 - 日本語は **Noto Sans JP**。本文 400〜500 / 16〜17px / 行間 1.9〜2.0
 - 日本語の大見出しは 500〜600（細すぎるフォント・明朝・極端な letter-spacing は使用しない）
 - 英字セクション見出しは **Cormorant Garamond**（上品な Serif）
 - 本文の最大横幅は **約620px**（画面いっぱいに横長表示しない）
-- 写真の上に文字を置く場合はスクリムでコントラストを確保
 - セクション上下の余白は大きめに確保
+- 写真を主役にするセクションでは、写真側を広く（`biz-inner` は 1.55 : 0.45）確保
 
 ## 未実装 / 今後の推奨
 
@@ -115,7 +125,6 @@ pm2 logs webapp --nostream
 - 会社概要・各社詳細ページ、採用ページの追加
 - OGP画像の設定（`renderer.tsx`）
 - プライバシーポリシー本文の正式確定（現状は雛形）
-- 独自ドメイン（abbygroup-inc.com）の割り当て
 
 ## デプロイ
 
