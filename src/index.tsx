@@ -221,6 +221,15 @@ const BrandHero = () => (
         <span class="sep" aria-hidden="true">/</span>
         <span>HUMAN RESOURCES</span>
       </p>
+
+      <p class="brand-hero-desc">
+        abby GROUPは、リユース・オークション・人材という事業を通じて、まだ眠っている価値を見つけ、次の未来へつないでいきます。
+      </p>
+
+      <a class="brand-hero-cta" href="#business">
+        <span>OUR BUSINESS</span>
+        <ArrowIcon />
+      </a>
     </div>
   </section>
 )
