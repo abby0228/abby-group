@@ -180,10 +180,22 @@ const Header = () => (
   </header>
 )
 
-/* ファーストビュー — 左寄せ・タイポグラフィのみ（写真なし）。
-   ロゴ（ブランド）＋タグライン（ブランドメッセージ）＋事業ドメインを、余白を大きく取って静かに見せる。 */
+/* ファーストビュー — ブランドイエロー × マスコット（猫）＋タイポグラフィ。
+   左にロゴ／タグライン／事業ドメイン、右にマスコットを配置する。 */
 const BrandHero = () => (
   <section class="brand-hero" id="brand-hero">
+    <picture>
+      <source srcset="/static/img/cat-hero.webp" type="image/webp" />
+      <img
+        class="brand-hero-cat"
+        src="/static/img/cat-hero.png"
+        alt="abby GROUP のマスコット"
+        width="802"
+        height="926"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </picture>
     <div class="brand-hero-inner">
       <h1 class="brand-hero-logo" aria-label="abby GROUP">
         <span class="brand-hero-mark">abby</span>

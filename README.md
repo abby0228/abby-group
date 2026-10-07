@@ -26,7 +26,7 @@ abby GROUP（株式会社abby／株式会社Abby auction／株式会社Abby Solu
 ## 現在の機能（実装済み）
 
 - 固定ヘッダー（スクロールで白背景に切替、モバイルはハンバーガーメニュー）
-- **ファーストビュー（BrandHero）** — **左寄せ・余白重視**のタイポグラフィのみの面（**WHITE / OFF WHITE背景・写真なし**）。表示順は「abby / G R O U P（ブランドロゴ）→ 価値をつなぎ、可能性をひらく。（ブランドメッセージ）→ REUSE / AUCTION / HUMAN RESOURCES（事業ドメイン）」。ロゴはヘッダーと同一タイポグラフィで、画面中央に単独で大きく置かず左に寄せて配置（バランス優先）。`abby → GROUP → コピー → ドメイン` の順でゆっくりフェードイン（`prefers-reduced-motion` 対応）。※「モノに、新たな価値を…」の3行はファーストビューからは削除（下部の黒ヒーローには既存どおり残る）
+- **ファーストビュー（BrandHero）** — **ブランドイエロー（`#F0B502`）背景 × マスコット（猫のイラスト）** ＋タイポグラフィ。左に「abby / G R O U P（ブランドロゴ）→ 価値をつなぎ、可能性をひらく。（ブランドメッセージ）→ REUSE / AUCTION / HUMAN RESOURCES（事業ドメイン）」、右にマスコットを下揃えで配置（画面高の約80%）。ロゴはヘッダーと同一タイポグラフィ、テキストは黒。`abby → GROUP → コピー → ドメイン` の順でゆっくりフェードイン（`prefers-reduced-motion` 対応）。※写真は不使用（イラストのみ）
 - HERO（**写真なし／黒背景＋タイポグラフィのみ**。メインコピーを主役にしたレイアウト。**ファーストビューの直下に配置**＝従来のTOPをそのまま維持）
 - ABOUT（**写真なし／タイポグラフィ＋余白のみ**。本文を約20%削減）
 - OUR BUSINESS（3事業を1画面ずつ紹介／01 REUSE・02 AUCTION・03 HUMAN RESOURCES。**写真なし／タイポグラフィのみ**。番号＋事業カテゴリーを大きく見せ、本文で説明）
@@ -82,7 +82,8 @@ abby GROUP（株式会社abby／株式会社Abby auction／株式会社Abby Solu
 - ビルド: Vite（`@hono/vite-build`）
 - スタイル: 自前CSS（`public/static/style.css`）— Tailwind等は不使用
 - フォント: Google Fonts（**Noto Sans JP**＝日本語本文・見出し／**Cormorant Garamond**＝英字ディスプレイ／Inter＝英字UI）
-- 画像: **サイト内に写真は一切なし**（タイポグラフィのみで構成）。唯一の画像は OGP用の `ogp.png`
+- 画像: **写真は一切なし**。唯一のイラストはファーストビューのマスコット（猫）`public/static/img/cat-hero.png`（WebP併用）。ほかに OGP用 `ogp.png`
+- マスコット: `public/static/img/cat-hero.png` / `cat-hero.webp`（透過。背景の黄色フチは除去済み）
 - OGP画像: `public/static/ogp.png`（1200×630）
 - 永続化: Cloudflare D1（お問い合わせのみ）
 
@@ -97,7 +98,10 @@ webapp/
 │   ├── style.css        # デザイン一式
 │   ├── app.js           # ヘッダー・ナビ・reveal・フォーム送信
 │   ├── favicon.svg
-│   └── ogp.png          # OGP画像（1200×630。サイト内の唯一の画像）
+│   ├── ogp.png          # OGP画像（1200×630）
+│   └── img/
+│       ├── cat-hero.png  # ファーストビューのマスコット（透過PNG）
+│       └── cat-hero.webp # 同（WebP）
 ├── ecosystem.config.cjs # PM2設定
 ├── wrangler.jsonc       # Cloudflare Pages設定
 └── vite.config.ts
@@ -115,10 +119,11 @@ pm2 logs webapp --nostream
 
 ## 写真・ビジュアルの方針
 
-- **サイト内に写真は一切使用していません**。全セクションをタイポグラフィ・余白・コントラストで構成（黒または白ベースでコピーを主役に）。
-- 写真を持たないことで、Editorial / Premium / Corporate のトーンを保ちつつ、読み込みも軽量です。
+- **写真は一切使用していません**。全セクションをタイポグラフィ・余白・コントラストで構成。
+- 例外は **ファーストビューのマスコット（猫のイラスト）** のみ。ブランドイエロー背景に右寄せ・下揃えで配置（画面高の約80%）。
+- マスコットは透過PNG/WebP。黄色背景から切り抜いた際の**黄色フチ（ハロー）は除去済み**（アルファを数px収縮＋縁の色を近傍色で補正）。
 - ゴールドは英字ラベルやドットなど**控えめなアクセント**としてのみ使用。
-- 唯一の画像は OGP用の `ogp.png`（SNS共有時のサムネイル）のみ。
+- その他の画像は OGP用の `ogp.png`（SNS共有時のサムネイル）のみ。
 
 ## タイポグラフィ / 可読性の方針
 
