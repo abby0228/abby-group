@@ -1582,6 +1582,44 @@ button {
 }
 
 /* ================================================================== *
+   MOBILE POLISH (safe areas / tap feedback)
+ * ================================================================== */
+/* iPhone のノッチ・ホームインジケータを避ける（左右は既存の余白と大きい方を採用） */
+.header-inner,
+.wrap {
+  padding-left: max(var(--pad), env(safe-area-inset-left));
+  padding-right: max(var(--pad), env(safe-area-inset-right));
+}
+
+.mobile-nav {
+  padding-left: max(var(--pad), env(safe-area-inset-left));
+  padding-right: max(var(--pad), env(safe-area-inset-right));
+}
+
+.site-footer {
+  padding-bottom: max(40px, env(safe-area-inset-bottom));
+}
+
+/* タップ時の青いハイライトを消し、タップ判定を軽くする */
+a,
+button,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 見出しの折り返しを自然にする */
+.sec-title,
+.page-title,
+.hero-title,
+.contact-title,
+.philosophy-title,
+.future-title {
+  text-wrap: balance;
+}
+
+/* ================================================================== *
    RESPONSIVE
  * ================================================================== */
 @media (max-width: 1024px) {
@@ -1667,9 +1705,26 @@ button {
 }
 
 @media (max-width: 720px) {
+  /* 縦のリズムを小さくする（大画面向けの余白はスマホには広すぎる） */
+  .section {
+    padding: clamp(72px, 16vw, 118px) 0;
+  }
+
+  .sec-head {
+    margin-bottom: clamp(40px, 9vw, 72px);
+  }
+
+  .eyebrow {
+    margin-bottom: clamp(20px, 5vw, 32px);
+  }
+
+  .hero {
+    padding-bottom: clamp(48px, 12vw, 88px);
+  }
+
   .hero-foot {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 28px;
   }
 
   .hero-sub {
@@ -1678,6 +1733,14 @@ button {
 
   .scroll-hint {
     display: none;
+  }
+
+  .biz-inner {
+    padding: clamp(40px, 10vw, 72px) var(--pad);
+  }
+
+  .biz-cat {
+    font-size: clamp(24px, 8vw, 34px);
   }
 
   .mv-row {
@@ -1691,10 +1754,12 @@ button {
 
   .footer-top {
     grid-template-columns: 1fr;
+    gap: 40px;
   }
 
   .footer-nav {
     grid-template-columns: 1fr;
+    gap: 32px;
   }
 
   .company-row {
@@ -1714,6 +1779,112 @@ button {
   .page-hero {
     padding-top: 130px;
   }
+
+  /* タップ領域を確保（リンクの縦パディングを少し広げる） */
+  .faq-link,
+  .company-link,
+  .cta-line {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+
+  /* 本文・リードの行長を最適化 */
+  .about-body,
+  .biz-text,
+  .future-body,
+  .faq-a {
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  /* 小型スマホ（〜480px）の最終調整 */
+  .section {
+    padding: 64px 0;
+  }
+
+  .hero-title {
+    font-size: clamp(30px, 9vw, 40px);
+    line-height: 1.35;
+  }
+
+  .sec-title {
+    font-size: clamp(23px, 6.6vw, 32px);
+  }
+
+  .page-title {
+    font-size: clamp(24px, 7.5vw, 34px);
+  }
+
+  .contact-title {
+    font-size: clamp(26px, 8vw, 34px);
+  }
+
+  .philosophy-title {
+    font-size: clamp(28px, 8.4vw, 40px);
+  }
+
+  .future-title {
+    font-size: clamp(26px, 7.8vw, 36px);
+  }
+
+  /* ロゴは少しだけ小さくしてヘッダーを軽くする */
+  .brand-mark {
+    font-size: 26px;
+  }
+
+  .footer-logo .brand-mark {
+    font-size: 30px;
+  }
+
+  /* NEWS: 日付・カテゴリーを1行、タイトルを下段に */
+  .news-row a,
+  .news-static {
+    grid-template-columns: auto minmax(0, 1fr) 18px;
+    grid-template-areas:
+      'date cat arrow'
+      'title title title';
+    row-gap: 10px;
+    gap: 12px;
+  }
+
+  .news-date {
+    font-size: 11px;
+  }
+
+  .news-cat {
+    font-size: 9px;
+    padding: 4px 11px;
+  }
+
+  /* FAQ: 記号と余白を詰める */
+  .faq-q {
+    gap: 12px;
+    font-size: 15px;
+  }
+
+  .faq-a {
+    gap: 12px;
+    font-size: 14px;
+  }
+
+  .faq-mark {
+    width: 22px;
+    height: 22px;
+    font-size: 12px;
+  }
+
+  /* 入力時に iOS が自動ズームしないよう 16px を維持 */
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    font-size: 16px;
+  }
+
+  /* プローズの左右余白を最適化 */
+  .prose {
+    max-width: 100%;
+  }
 }
 
 /* ------------------------------------------------------------------ *
@@ -1721,12 +1892,6 @@ button {
  * ------------------------------------------------------------------ */
 @media print {
   .site-header,
-  .scroll-hint,
-  .pt-overlay {
-    display: none !important;
-  }
-}
-ite-header,
   .scroll-hint,
   .pt-overlay {
     display: none !important;

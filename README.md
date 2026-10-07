@@ -138,6 +138,18 @@ pm2 logs webapp --nostream
 - CONTACT ボタンは控えめなサイズ（`padding: 9px 22px` / `border-radius: 999px`）でナビになじませる。
 - NEWS の表示は `src/index.tsx` の **`SHOW_NEWS`** で一括制御（ナビの NEWS とトップの NEWS セクションを同時に切り替え）。
 
+## レスポンシブ / モバイル最適化の方針
+
+- ブレークポイントは **1024px（ナビ→ハンバーガー）／720px（タブレット縦・大型スマホ）／480px（小型スマホ）** の3段。
+- **セーフエリア対応**：`.wrap` / `.header-inner` / `.mobile-nav` は `max(var(--pad), env(safe-area-inset-*))`、フッターは `max(40px, env(safe-area-inset-bottom))` でノッチ・ホームインジケータを回避。
+- **タップ最適化**：`-webkit-tap-highlight-color: transparent`、リンクの縦パディングを微増してタップ領域を確保。
+- **縦のリズム**：720px以下では `.section` の余白を `clamp(72px, 16vw, 118px)` に、480px以下では `64px` に縮小し、スマホで間延びしないように。
+- **見出し**：`text-wrap: balance` で折り返しを自然に。480px以下ではヒーロー/セクション見出しを個別に最適化。
+- **NEWS**：480px以下では日付・カテゴリーを1行、タイトルを下段に配置。
+- **FAQ**：480px以下では Q/A 記号と余白を詰めて読みやすく。
+- **フォーム**：iOS の自動ズームを避けるため入力欄は `16px` を維持。
+- **ロゴ**：480px以下では `abby` を 26px（フッター 30px）に少し縮小してヘッダーを軽く。
+
 ## 未実装 / 今後の推奨
 
 - **アクセス解析の有効化** — `renderer.tsx` の `CF_ANALYTICS_TOKEN` に Cloudflare Web Analytics のトークンを設定するとビーコンが有効になります（ダッシュボードでサイト追加 → トークン取得）
