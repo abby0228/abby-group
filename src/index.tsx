@@ -238,11 +238,6 @@ const Hero = () => (
   <section class="hero" id="hero">
     <div class="hero-content">
       <p class="eyebrow light">abby GROUP</p>
-      <h2 class="hero-title">
-        価値をつなぎ、
-        <br />
-        可能性をひらく。
-      </h2>
 
       <div class="hero-foot">
         <p class="hero-sub">
@@ -252,15 +247,6 @@ const Hero = () => (
           <br />
           企業に、新たな成長を。
         </p>
-        <div class="hero-note">
-          <p class="hero-desc">
-            abby GROUPは、リユース・オークション・人材という事業を通じて、まだ眠っている価値を見つけ、次の未来へつないでいきます。
-          </p>
-          <a class="cta-line light" href="#business">
-            <span>OUR BUSINESS</span>
-            <ArrowIcon />
-          </a>
-        </div>
       </div>
     </div>
 
