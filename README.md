@@ -34,7 +34,7 @@ abby GROUP（株式会社abby／株式会社Abby auction／株式会社Abby Solu
 - GROUP COMPANIES（会社名・事業カテゴリー・VIEW WEBSITE のみのシンプル一覧）
 - OUR FUTURE（**写真なし／黒背景＋タイポグラフィのみ**。大見出し＋本文＋ `REUSE × AUCTION × HUMAN RESOURCES × NEXT`）
 - FAQ（よくあるご質問。5件のQ&A。Q/Aバッジ付き。`/group` やグループ概要への導線も内包）
-- NEWS（**データが空の場合はセクションごと非表示**。CMS差し替えしやすいデータ構造）
+- NEWS（お知らせ一覧。**事実ベースの告知2件を掲載中**。`url` 省略時はリンクなしの行として表示。データが空になればセクションごと非表示。CMS差し替えしやすいデータ構造）
 - CONTACT（大見出し＋本文＋CONTACT US ボタン → /contact）
 - **グループ概要ページ（/group）** — 3事業一覧＋グループの成り立ち＋各社紹介（法人関係の推測は記載せず）
 - **ヘッダーの GROUP COMPANIES ドロップダウン** — 3社の公式サイト＋「グループ概要を見る」への導線（モバイルは GROUP OVERVIEW リンク）
@@ -69,7 +69,8 @@ abby GROUP（株式会社abby／株式会社Abby auction／株式会社Abby Solu
 ## データ構造
 
 - `src/index.tsx` 内の `COMPANIES` 配列 … 3事業のデータ（番号・カテゴリー・会社名・本文・リード・リンク）
-- `NEWS` 配列 … ニュース項目（date / category / title / url）。**空配列のとき NEWSセクションとナビの NEWS は自動的に非表示**
+- `NEWS` 配列 … ニュース項目（date / category / title / url?）。**url は省略可**（省略時はリンクなし行）。**空配列のとき NEWSセクションとナビの NEWS は自動的に非表示**
+- 記載ポリシー: NEWS は**事実のみ**を記載（推測・生成した実績や数値は書かない）
 - `FAQ` 配列 … よくあるご質問（q / a）
 - D1 テーブル `contacts` … お問い合わせ保存先（`DB` バインディング設定時のみ）
 - `renderer.tsx` の `SITE_URL` / `OGP_IMAGE` / `ORG_JSON_LD` / `CF_ANALYTICS_TOKEN` … SEO・構造化データ・解析の設定
@@ -131,7 +132,8 @@ pm2 logs webapp --nostream
 
 - **アクセス解析の有効化** — `renderer.tsx` の `CF_ANALYTICS_TOKEN` に Cloudflare Web Analytics のトークンを設定するとビーコンが有効になります（ダッシュボードでサイト追加 → トークン取得）
 - **お問い合わせの実送信・メール通知** — Resend / SendGrid 等の外部API連携（現状は D1 保存または受理のみ。要望があれば別途対応）
-- NEWSの登録 / CMS連携（`NEWS` 配列が空の間はセクション非表示。D1/KV/ヘッドレスCMSへ差し替え可能）
+- **NEWSの拡充** — 記事が増えたら専用 `/news` ページ（一覧＋詳細）に切り出す（現状はトップのセクションのみ）
+- NEWS の CMS / D1 連携（`NEWS` 配列を D1・KV・ヘッドレスCMSへ差し替え可能）
 - 各グループ会社の詳細ページ、採用ページの追加
 - 多言語対応（英語版）
 

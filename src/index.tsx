@@ -67,15 +67,29 @@ const COMPANIES: Company[] = [
   },
 ]
 
-type NewsItem = { date: string; category: string; title: string; url: string }
+type NewsItem = { date: string; category: string; title: string; url?: string }
 
 /*
  * NEWS は CMS / D1 等に差し替え可能。
  * 配列が空の場合、NEWSセクションとナビの NEWS 項目は自動的に非表示になります。
  * 追加する場合は下記の形式で項目を入れてください。
- *   { date: '2025.01.01', category: 'GROUP', title: 'お知らせのタイトル', url: '/news/xxx' }
+ *   { date: '2026.10.07', category: 'GROUP', title: 'お知らせのタイトル', url: '/news/xxx' }
+ * url は省略可。省略した場合はリンクなしの行として表示されます。
+ *
+ * 記載ポリシー: 事実のみを記載します（推測・生成した実績や数値は記載しません）。
  */
-const NEWS: NewsItem[] = []
+const NEWS: NewsItem[] = [
+  {
+    date: '2026.10.07',
+    category: 'GROUP',
+    title: '「abby GROUP」グループポータルサイトを開設しました。',
+  },
+  {
+    date: '2026.10.07',
+    category: 'GROUP',
+    title: 'グループ3社（株式会社abby／株式会社Abby auction／株式会社Abby Solution）の公式サイトへのリンクを掲載しました。',
+  },
+]
 
 const HAS_NEWS = NEWS.length > 0
 
@@ -509,26 +523,35 @@ const News = () => {
         </header>
 
         <ul class="news-list">
-          {NEWS.map((n) => (
-            <li class="news-row reveal">
-              <a href={n.url}>
+          {NEWS.map((n) => {
+            const isExternal = !!n.url && /^https?:\/\//.test(n.url)
+            const inner = (
+              <>
                 <span class="news-date">{n.date}</span>
                 <span class="news-cat">{n.category}</span>
                 <span class="news-title">{n.title}</span>
                 <span class="news-arrow" aria-hidden="true">
-                  <ArrowUpRight />
+                  {n.url ? <ArrowUpRight /> : null}
                 </span>
-              </a>
-            </li>
-          ))}
+              </>
+            )
+            return (
+              <li class={`news-row reveal${n.url ? '' : ' is-static'}`}>
+                {n.url ? (
+                  <a
+                    href={n.url}
+                    target={isExternal ? '_blank' : undefined}
+                    rel={isExternal ? 'noopener noreferrer' : undefined}
+                  >
+                    {inner}
+                  </a>
+                ) : (
+                  <div class="news-static">{inner}</div>
+                )}
+              </li>
+            )
+          })}
         </ul>
-
-        <div class="news-foot reveal">
-          <a class="cta-line" href="#news">
-            <span>VIEW ALL</span>
-            <ArrowIcon />
-          </a>
-        </div>
       </div>
     </section>
   )

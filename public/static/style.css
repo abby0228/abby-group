@@ -1204,6 +1204,20 @@ button {
   color: var(--ink);
 }
 
+/* リンクなしの行（url 省略時）— 同じグリッドで静的に表示 */
+.news-static {
+  display: grid;
+  grid-template-columns: 130px 170px minmax(0, 1fr) 24px;
+  align-items: center;
+  gap: clamp(16px, 3vw, 40px);
+  padding: clamp(22px, 2.8vw, 34px) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.news-row.is-static .news-arrow {
+  opacity: 0;
+}
+
 .news-foot {
   margin-top: clamp(36px, 5vw, 60px);
 }
@@ -1617,7 +1631,8 @@ button {
     margin-left: 0;
   }
 
-  .news-row a {
+  .news-row a,
+  .news-static {
     grid-template-columns: 110px minmax(0, 1fr) 20px;
     grid-template-areas:
       'date cat arrow'
