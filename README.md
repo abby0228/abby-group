@@ -21,7 +21,7 @@ abby GROUP（株式会社abby／株式会社Abby auction／株式会社Abby Solu
 - 3社はそれぞれ **独立した法人** です。親会社・子会社・資本関係・出資比率などの関係は記載していません。
 - 売上・社員数・設立年・拠点数・実績・代表者メッセージ・お客様の声などの**推測／生成は行っていません**。
 - 「業界No.1」等の根拠のない表現は使用していません。
-- 各社の公式サイトリンクのみ掲載しています（株式会社Abby auctionのリンクは未確定のため、リンクボタンは非表示）。
+- 各社の公式サイトリンクのみ掲載しています（株式会社abby・株式会社Abby auction・株式会社Abby Solution の3社すべてリンク済み）。
 
 ## 現在の機能（実装済み）
 
@@ -33,20 +33,31 @@ abby GROUP（株式会社abby／株式会社Abby auction／株式会社Abby Solu
 - PHILOSOPHY（**写真なし／BLACK背景**の印象的なセクション。大きなタイポグラフィ＋余白。MISSION / VISIONも同世界観の黒背景）
 - GROUP COMPANIES（会社名・事業カテゴリー・VIEW WEBSITE のみのシンプル一覧）
 - OUR FUTURE（**写真なし／黒背景＋タイポグラフィのみ**。大見出し＋本文＋ `REUSE × AUCTION × HUMAN RESOURCES × NEXT`）
+- FAQ（よくあるご質問。5件のQ&A。Q/Aバッジ付き。`/group` やグループ概要への導線も内包）
 - NEWS（**データが空の場合はセクションごと非表示**。CMS差し替えしやすいデータ構造）
 - CONTACT（大見出し＋本文＋CONTACT US ボタン → /contact）
+- **グループ概要ページ（/group）** — 3事業一覧＋グループの成り立ち＋各社紹介（法人関係の推測は記載せず）
+- **ヘッダーの GROUP COMPANIES ドロップダウン** — 3社の公式サイト＋「グループ概要を見る」への導線（モバイルは GROUP OVERVIEW リンク）
 - スクロール連動のフェードイン（`prefers-reduced-motion` 対応）
 - ページ遷移オーバーレイ（同一ページ内アンカーには適用しない）
 - お問い合わせフォーム（/contact）＋ API（/api/contact、D1保存に対応／DB未設定でも受理）
-- 404ページ、プライバシーポリシーページ（/privacy）
+- 404ページ、プライバシーポリシーページ（/privacy、**全10条の正式版**）
+- **SEO / OGP** — canonical、og:image（1200×630 `ogp.png`）、twitter:card、robots、テーマカラー
+- **構造化データ（JSON-LD）** — Organization（`sameAs` に3社公式サイト）＋ WebSite
+- **robots.txt / sitemap.xml** — 動的ルートで配信（`/`・`/group`・`/contact`・`/privacy`）
+- **画像最適化** — 事業写真3枚を最適化し、`<picture>` で **WebP** を優先配信（フォールバックはJPEG）
+- **アクセス解析の受け口** — Cloudflare Web Analytics のビーコン（トークン設定時のみ有効。`renderer.tsx` の `CF_ANALYTICS_TOKEN`）
 
 ## ルーティング / API
 
 | メソッド | パス | 内容 |
 | --- | --- | --- |
 | GET | `/` | トップページ（全セクション） |
+| GET | `/group` | グループ概要 |
 | GET | `/contact` | お問い合わせフォーム |
 | GET | `/privacy` | プライバシーポリシー |
+| GET | `/robots.txt` | クローラ向け（Sitemap を明記） |
+| GET | `/sitemap.xml` | サイトマップ（4ページ） |
 | POST | `/api/contact` | お問い合わせ送信（JSON）→ D1 `contacts` テーブルへ保存 |
 | — | その他 | 404ページ |
 
@@ -60,7 +71,9 @@ abby GROUP（株式会社abby／株式会社Abby auction／株式会社Abby Solu
 
 - `src/index.tsx` 内の `COMPANIES` 配列 … 3事業のデータ（番号・カテゴリー・会社名・本文・画像・リンク）
 - `NEWS` 配列 … ニュース項目（date / category / title / url）。**空配列のとき NEWSセクションとナビの NEWS は自動的に非表示**
+- `FAQ` 配列 … よくあるご質問（q / a）
 - D1 テーブル `contacts` … お問い合わせ保存先（`DB` バインディング設定時のみ）
+- `renderer.tsx` の `SITE_URL` / `OGP_IMAGE` / `ORG_JSON_LD` / `CF_ANALYTICS_TOKEN` … SEO・構造化データ・解析の設定
 
 ## 使用技術
 
@@ -68,7 +81,8 @@ abby GROUP（株式会社abby／株式会社Abby auction／株式会社Abby Solu
 - ビルド: Vite（`@hono/vite-build`）
 - スタイル: 自前CSS（`public/static/style.css`）— Tailwind等は不使用
 - フォント: Google Fonts（**Noto Sans JP**＝日本語本文・見出し／**Cormorant Garamond**＝英字ディスプレイ／Inter＝英字UI）
-- 画像: `public/static/img/`（**各事業の実態を伝えるオリジナル生成画像3枚のみ**。AI生成）
+- 画像: `public/static/img/`（**各事業の実態を伝えるオリジナル生成画像3枚のみ**。AI生成。JPEG＋WebPの2形式を `<picture>` で配信）
+- OGP画像: `public/static/ogp.png`（1200×630）
 - 永続化: Cloudflare D1（お問い合わせのみ）
 
 ## ディレクトリ構成
@@ -82,7 +96,8 @@ webapp/
 │   ├── style.css        # デザイン一式
 │   ├── app.js           # ヘッダー・ナビ・reveal・フォーム送信
 │   ├── favicon.svg
-│   └── img/             # 事業写真3枚（biz-reuse / biz-auction / biz-hr）
+│   ├── ogp.png          # OGP画像（1200×630）
+│   └── img/             # 事業写真3枚（biz-reuse / biz-auction / biz-hr、各 .jpg + .webp）
 ├── ecosystem.config.cjs # PM2設定
 ├── wrangler.jsonc       # Cloudflare Pages設定
 └── vite.config.ts
@@ -119,12 +134,11 @@ pm2 logs webapp --nostream
 
 ## 未実装 / 今後の推奨
 
-- 株式会社Abby auction の公式サイトURL確定 → `COMPANIES` の `url` を設定すると VIEW WEBSITE が自動表示されます（未設定時はボタン非表示）
+- **アクセス解析の有効化** — `renderer.tsx` の `CF_ANALYTICS_TOKEN` に Cloudflare Web Analytics のトークンを設定するとビーコンが有効になります（ダッシュボードでサイト追加 → トークン取得）
+- **お問い合わせの実送信・メール通知** — Resend / SendGrid 等の外部API連携（現状は D1 保存または受理のみ。要望があれば別途対応）
 - NEWSの登録 / CMS連携（`NEWS` 配列が空の間はセクション非表示。D1/KV/ヘッドレスCMSへ差し替え可能）
-- お問い合わせのメール通知（Resend / SendGrid 等の外部API連携）
-- 会社概要・各社詳細ページ、採用ページの追加
-- OGP画像の設定（`renderer.tsx`）
-- プライバシーポリシー本文の正式確定（現状は雛形）
+- 各グループ会社の詳細ページ、採用ページの追加
+- 多言語対応（英語版）
 
 ## デプロイ
 
@@ -146,6 +160,7 @@ pm2 logs webapp --nostream
   npx wrangler pages deploy dist --project-name abby-group --branch main
   ```
 - **備考**: D1を利用する場合、`wrangler.jsonc` の `d1_databases` を有効化し、`DB` をバインドしてください。
+- **デプロイ時の注意**: `_routes.json` が `/*` を関数へ通すため、`/robots.txt` と `/sitemap.xml` は **Hono のルート**として実装しています（`public/` 直下の静的ファイルでは配信されません）。
 
 ---
 
