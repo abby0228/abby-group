@@ -128,6 +128,16 @@ pm2 logs webapp --nostream
 - セクション上下の余白は大きめに確保
 - OUR BUSINESS は番号（01/02/03）と事業カテゴリーを大きく見せ、本文は `--read`（約620px）で読みやすく
 
+## ロゴ / ナビゲーションの方針
+
+- **ロゴは上下2段組み**（変更不可）：上段に小さな **abby**（Poppins 800 / 小文字・タイトトラッキング）、下段に **G R O U P**（細め Sans / 大文字 / 字間広め / abby の中央揃え / 幅は abby の約58%）。
+- 上下の間隔は詰め（`.brand` は `gap:0` + `.brand-sub` の `margin-top:-2px`）、**1つのロゴとしてまとまって見える**ように調整。
+- ヘッダーの abby は `29px`、フッターは `32px`（フッターは少し大きめ）。ヘッダー高さ・ナビは圧迫しない。
+- ナビの英字は `11px` / `letter-spacing 0.14em` / 大文字で統一。ホバー・現在地は **細い下線**のみ。
+- GROUP COMPANIES のドロップダウン指標は **極小のドット**（ひし形装飾は廃止）。
+- CONTACT ボタンは控えめなサイズ（`padding: 9px 22px` / `border-radius: 999px`）でナビになじませる。
+- NEWS の表示は `src/index.tsx` の **`SHOW_NEWS`** で一括制御（ナビの NEWS とトップの NEWS セクションを同時に切り替え）。
+
 ## 未実装 / 今後の推奨
 
 - **アクセス解析の有効化** — `renderer.tsx` の `CF_ANALYTICS_TOKEN` に Cloudflare Web Analytics のトークンを設定するとビーコンが有効になります（ダッシュボードでサイト追加 → トークン取得）

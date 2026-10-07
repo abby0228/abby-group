@@ -91,7 +91,14 @@ const NEWS: NewsItem[] = [
   },
 ]
 
-const HAS_NEWS = NEWS.length > 0
+/*
+ * NEWS の表示スイッチ。
+ * ヘッダー/フッターのナビの「NEWS」と、トップの NEWS セクションをまとめて制御します。
+ *   true  … 表示（事実ベースの告知2件を掲載中）
+ *   false … 一時的に非表示（NEWS を正式公開したら true に戻す）
+ */
+const SHOW_NEWS = true
+const HAS_NEWS = SHOW_NEWS && NEWS.length > 0
 
 /* ------------------------------------------------------------------ *
  * パーツ
